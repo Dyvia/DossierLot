@@ -78,7 +78,7 @@ public class Fenetre extends JFrame implements ActionListener,KeyListener, Compo
         this.acceuil.b_gest_prot.addActionListener(this);
         
         //Acceder_lot_en_cours
-        access = new Acceder_lot_en_cours(w, h);
+        access = new Acceder_lot_en_cours(w, h,donnees);
         this.access.b_retour.addActionListener(this);
         this.access.b_acc_lot.addActionListener(this);
         
@@ -218,6 +218,7 @@ public class Fenetre extends JFrame implements ActionListener,KeyListener, Compo
             Fenetre.this.backAcceuil();
         }
         if (clic.getSource() == access.b_acc_lot){
+            donnees.prepEnCours(access.getNumLot(),access.getNomMed(),access.getQteMed());
             Fenetre.this.AccessToEtapes();
         }  
         
@@ -227,7 +228,7 @@ public class Fenetre extends JFrame implements ActionListener,KeyListener, Compo
         }
         
         if(clic.getSource()==nouveau_lot.b_new_lot){
-            System.out.println(nouveau_lot.getItemSelect());
+            //System.out.println(nouveau_lot.getItemSelect());
             
             try {
                 nouveau_lot.creerLot(donnees.getCheminLots(),donnees.getCheminPDF());
@@ -295,10 +296,10 @@ public class Fenetre extends JFrame implements ActionListener,KeyListener, Compo
     @Override
     public void keyPressed(KeyEvent e) {
         if(this.getContentPane()==this.access){
-            if(e.getKeyCode()>=48&&e.getKeyCode()<=90){
+            if((e.getKeyCode()>=48&&e.getKeyCode()<=90)||e.getKeyCode()==32){
                 //System.out.println(e.getKeyText(e.getKeyCode()));
                 //System.out.println(e.getKeyChar());
-                System.out.println(e.getKeyCode());
+                //System.out.println(e.getKeyCode());
                 this.access.addLettre(e.getKeyChar());
             }
         }

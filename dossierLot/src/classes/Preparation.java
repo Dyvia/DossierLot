@@ -21,6 +21,20 @@ public class Preparation {
     private Date dateLim;
     private String photo;
     private String etiquette;
+    private Medicament medicament;
+
+    Preparation(String numLot,Medicament medicament,String qteMed) {
+        this.numLot=numLot;
+        this.medicament=medicament;
+        this.qte=Integer.parseInt(qteMed);
+    }
+
+    @Override
+    public String toString() {
+        return "Preparation{" + "numLot=" + numLot + ", numOrd=" + numOrd + ", qte=" + qte + ", datePrep=" + datePrep + ", dateLim=" + dateLim + ", photo=" + photo + ", etiquette=" + etiquette + ", medicament=" + medicament + '}';
+    }
+    
+    
     
     
     

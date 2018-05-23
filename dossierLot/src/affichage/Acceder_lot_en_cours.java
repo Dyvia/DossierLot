@@ -5,6 +5,7 @@
  */
 package affichage;
 
+import classes.Donnees;
 import java.awt.Color;
 import java.awt.Font;
 import javafx.scene.input.KeyCode;
@@ -22,14 +23,15 @@ public class Acceder_lot_en_cours extends JPanel{
     JButton b_acc_lot, b_retour;
     JLabel num_lot,scan_eti;
     String resultScan="";
+    String numLot,nomMed,qteMed;
     int wid, hei;
     
-    public Acceder_lot_en_cours(int wi, int he) {
+    public Acceder_lot_en_cours(int wi, int he,Donnees donnees) {
         
         //ImageIcon fleche = new ImageIcon("fleche.jpg");      
         
         scan_eti = new JLabel("<html><font size=15 style='Arial' color='white'>SCANNEZ ETIQUETTE</font></html>");
-        b_acc_lot = new JButton("<html><font size=15 style='Arial' color='white'>Accèder au lot</font></html>");
+        b_acc_lot = new JButton("<html><font size=15 style='Arial' color='white'>Accéder au lot</font></html>");
         num_lot = new JLabel("<html><font size=15 style='Arial' color='white'>n° de lot :</font></html>");
         b_retour = new JButton("<html><font size=15 style='Arial' color='white'>R</font></html>");
         
@@ -66,16 +68,49 @@ public class Acceder_lot_en_cours extends JPanel{
 
     }
 
+    public String getResultScan() {
+        return resultScan;
+    }
+
+    public String getNumLot() {
+        return numLot;
+    }
+
+    public String getNomMed() {
+        return nomMed;
+    }
+
+    public String getQteMed() {
+        return qteMed;
+    }
+    
+    
+    
+
     void addLettre(char keyChar) {
         if(keyChar!='#'){
             this.resultScan=this.resultScan+keyChar;
-            System.out.println(this.resultScan);
+            //System.out.println(this.resultScan);
         } else if(keyChar=='~'){
             this.resultScan="";
+            this.numLot=null;
+            this.nomMed=null;
+            this.qteMed=null;
             System.out.println("debutmot");
         } else {
-            System.out.println("finmot");
-            scan_eti.setText("<html><font size=15 style='Arial' color='white'>"+resultScan+"</font></html>");
+            System.out.println("finchamp");
+            if(numLot==null){
+                numLot=resultScan;
+                System.out.println(numLot);
+            } else if(nomMed==null){
+                nomMed=resultScan;
+                System.out.println(nomMed);
+            } else {
+                qteMed=resultScan;
+                System.out.println(qteMed);
+            }
+            resultScan="";
+            scan_eti.setText("<html><font size=15 style='Arial' color='white'>"+numLot+"</font></html>");
             this.repaint();
         }
     }
