@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author dyvia
  */
-class Necessaire {
+public class Necessaire {
     private int id;
     private String numLot;
     private String dateLim;
@@ -32,4 +32,35 @@ class Necessaire {
     void ajoutConditionnement(int conditionnementToAdd) {
        this.conditionnement.add(conditionnementToAdd);
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getNumLot() {
+        return numLot;
+    }
+
+    public String getDateLim() {
+        return dateLim;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public float getQte() {
+        return qte;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public ArrayList<Integer> getConditionnement() {
+        return conditionnement;
+    }
+    
+    
+    
 }

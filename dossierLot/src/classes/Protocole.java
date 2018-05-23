@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author dyvia
  */
-class Protocole {
+public class Protocole {
     private int type;
     private String intitule;
     private String resultat;
@@ -75,7 +75,43 @@ class Protocole {
         necessaire.add(itemToAdd);
     }
 
+    public ArrayList<Necessaire> getNecessaire() {
+        return necessaire;
+    }
     
+    public int getNbChimique(){
+        int cpt=0;
+        for(int i=0;i<necessaire.size();i++){
+            if(necessaire.get(i).getType()==1){
+                cpt++;
+            }
+            
+        }
+        return cpt;
+    }
+    
+    public int getNbExcipient(){
+         int cpt=0;
+        for(int i=0;i<necessaire.size();i++){
+            if(necessaire.get(i).getType()==2){
+                cpt++;
+            }
+            
+        }
+        return cpt;
+    
+    }
+
+    public int getNbMateriel(){
+         int cpt=0;
+        for(int i=0;i<necessaire.size();i++){
+            if(necessaire.get(i).getType()==3){
+                cpt++;
+            }
+            
+        }
+        return cpt;
+    }
     
     
     

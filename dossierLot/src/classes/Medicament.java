@@ -106,7 +106,14 @@ public class Medicament {
         this.joursUtilisation = joursUtilisation;
     }
     
-    
+    public Protocole getFabProtocole(){
+        for(int i=0;i<protocoles.size();i++){
+            if(protocoles.get(i).getType()==1){
+                return protocoles.get(i);
+            }
+        }
+        return null;
+    }
     
     
     
