@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.simple.parser.ParseException;
 /**
  *
  * @author dyvia
@@ -19,7 +20,7 @@ public class DossierLot {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         Scanner sc=new Scanner(System.in);
         /*Barcode code=new Barcode(sc.nextLine());
         if(code.analyse()==true){

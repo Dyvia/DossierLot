@@ -10,6 +10,7 @@ import classes.Medicament;
 import classes.Machine;
 import classes.Etape;
 import classes.Protocole;
+import java.io.File;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -30,9 +31,10 @@ public class Donnees {
     private String cheminJSON;
     private String cheminLots;
     private String cheminPDF;
+    private Preparation prepEnCours;
    
     
-    public boolean parseJSONMedicaments(){
+    public boolean parseJSONMedicaments() throws ParseException{
         medicaments=new  ArrayList<Medicament>();
         JSONParser parser = new JSONParser();
 
@@ -80,13 +82,13 @@ public class Donnees {
 
         } catch (FileNotFoundException e) {
             return false;
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             return false;
         }
         return true;
     }
     
-    public boolean parseJSONProtocole(int idMed,int idProt){
+    public boolean parseJSONProtocole(int idMed,int idProt) throws ParseException{
         JSONParser parser = new JSONParser();
 
         try {
@@ -157,13 +159,13 @@ public class Donnees {
             }
         } catch (FileNotFoundException e) {
             return false;
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             return false;
         }
         return true;
     }
 
-    private Necessaire parseJSONNecessaire(int idItem,float qte) {
+    private Necessaire parseJSONNecessaire(int idItem,float qte) throws ParseException {
         JSONParser parser = new JSONParser();
 
         try {
@@ -197,7 +199,7 @@ public class Donnees {
             }
         } catch (FileNotFoundException e) {
             return null;
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             return null;
         }
         return null;
@@ -219,7 +221,7 @@ public class Donnees {
         return cheminPDF;
     }
     
-    public Medicament getItemNommé(String nom){
+    public Medicament getItemNomme(String nom){
         for(int i=0;i<medicaments.size();i++){
             if(medicaments.get(i).getNom().equals(nom)){
                 return medicaments.get(i);
@@ -252,5 +254,8 @@ public class Donnees {
         return listeNoms;
     }
     
-    
+    public void prepEnCours(String numLot,String nomMed,String qteMed){
+        this.prepEnCours=new Preparation(numLot,getItemNomme(nomMed),qteMed);
+        System.out.println(this.prepEnCours);
+    }
 }

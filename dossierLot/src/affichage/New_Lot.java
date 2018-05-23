@@ -132,7 +132,7 @@ public class New_Lot extends JPanel{
         doc.close();
         
         DataMatrix barcode = new DataMatrix(); 
-        barcode.setData("~"+numLot+"#");
+        barcode.setData("~"+numLot+"#"+list_med.getSelectedItem().toString()+"#"+qt.getText().toString()+"#");
  
 
         barcode.renderBarcode("C://Users//dyvia//OneDrive//Bureau//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//"+numLot+".gif");

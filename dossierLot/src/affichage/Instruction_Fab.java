@@ -173,7 +173,9 @@ public class Instruction_Fab extends JPanel {
             grid_nece.gridx = 1;
             grid_nece.gridy = i;
             necessaire.add(name, grid_nece);
-         
+            
+            grid_nece.fill = GridBagConstraints.HORIZONTAL;
+          
             scan_1.setText("SCAN");
             scan_1.setOpaque(true);
             scan_1.setHorizontalAlignment(SwingConstants.CENTER); 
@@ -185,8 +187,6 @@ public class Instruction_Fab extends JPanel {
             grid_nece.gridx = 2;
             grid_nece.gridy = i;
             necessaire.add(scan_1, grid_nece);
-            
-            grid_nece.fill = GridBagConstraints.HORIZONTAL;
 
         }
                  
