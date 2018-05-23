@@ -57,7 +57,43 @@ public class Prep_Materiel extends JPanel {
     
     private void initialisation(){
         
-       this.setBackground(Color.WHITE);
+        int var1 = 2;
+        int var2 = 10;
+        int var3= 50;
+        
+        int max;
+        
+        int test1;
+        if (var1*40+40 < hei*28/100){
+            test1 = hei*28/100;
+        }
+        else { test1 = var1*40+40; }
+        
+        max = test1;
+        
+        int test2;
+        if (var2*40+40 < hei*28/100){
+            test2 = hei*28/100;
+        }
+        else { test2 = var2*40+40; }
+        
+        if (test1 < test2){
+            max = test2;
+        }
+        
+        int test3;
+        if (var3*40+40 < hei*28/100){
+            test3 = hei*28/100;
+        }
+        else { test3 = var3*40+40; }
+        
+        if (test2 < test3){
+            max = test3;
+        }
+        
+        max = max + 40;
+        
+        this.setBackground(Color.WHITE);
         
         info.setBounds(0, 0, wid, hei*5/100);
         info.setBackground(new java.awt.Color(0,156,218));
@@ -83,7 +119,7 @@ public class Prep_Materiel extends JPanel {
         l_mat.setHorizontalAlignment( SwingConstants.CENTER);
         l_mat.setForeground(Color.white);
         l_mat.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
-        this.add(l_mat);
+        this.add(l_mat);  
         
         b_valider.setBounds(wid*45/100, hei*80/100, wid*10/100, hei*8/100);
         b_valider.setBackground(new java.awt.Color(0,156,218));
@@ -99,15 +135,18 @@ public class Prep_Materiel extends JPanel {
         this.add(formule);
 
         princ_act.setBackground(Color.WHITE);
-        princ_act.setPreferredSize(new Dimension(wid/2 - wid*5/100, 4000));
+        //princ_act.setBounds(0, hei*9/100, wid/2 - wid*5/100, hei*28/100);
+        princ_act.setPreferredSize(new Dimension(wid/2 - wid*5/100, max));
         princ_act.setAutoscrolls(true);
 
         exci.setBackground(Color.WHITE);
-        exci.setPreferredSize(new Dimension(wid/2 - wid*5/100, 4000));
+        //exci.setBounds(0, hei*28/100, wid/2 - wid*5/100, test3);
+        exci.setPreferredSize(new Dimension(wid/2 - wid*5/100, max));
         exci.setAutoscrolls(true);
 
         condi.setBackground(Color.WHITE);
-        condi.setPreferredSize(new Dimension(wid/2 - wid*5/100, 4000));
+        //condi.setBounds(0, (hei*28/100)*2, wid/2 - wid*5/100, test3);
+        condi.setPreferredSize(new Dimension(wid/2 - wid*5/100, max));
         condi.setAutoscrolls(true);
 
         mat.setBackground(Color.WHITE);
@@ -163,7 +202,21 @@ public class Prep_Materiel extends JPanel {
         
         grid_princ_act.weighty = 1;
 
-        for (int i = 0; i < 100; i++) {
+        int i = 0;
+        
+        quant = new JLabel();
+        quant.setText("Principe actif");
+        quant.setOpaque(true);
+        quant.setHorizontalAlignment(SwingConstants.CENTER); 
+        quant.setFont(new Font("Arial", Font.BOLD, 17));
+        quant.setBackground(new java.awt.Color(0,156,218));
+        quant.setForeground(Color.WHITE);
+        quant.setPreferredSize(new Dimension(150, 30));
+        grid_princ_act.gridx = 0;
+        grid_princ_act.gridy = 0;
+        princ_act.add(quant, grid_princ_act);
+               
+        for (i = 1; i <= var1; i++) {
              
             quant = new JLabel ();
             name = new JLabel ("GENTAMICINE 80mg - 2ml");
@@ -180,10 +233,10 @@ public class Prep_Materiel extends JPanel {
             quant.setForeground(Color.WHITE);
             quant.setPreferredSize(new Dimension(40, 30));
             quant.setBorder(new LineBorder(Color.BLUE));
-            grid_princ_act.gridx = 0;
+            grid_princ_act.gridx = 1;
             grid_princ_act.gridy = i;
             princ_act.add(quant, grid_princ_act);
-
+                        
             name.setText("GENTAMICINE 80mg - 2ml");
             name.setOpaque(true);
             name.setHorizontalAlignment(SwingConstants.CENTER); 
@@ -192,7 +245,7 @@ public class Prep_Materiel extends JPanel {
             name.setForeground(Color.WHITE);
             name.setPreferredSize(new Dimension(300, 30));
             name.setBorder(new LineBorder(Color.BLUE));
-            grid_princ_act.gridx = 1;
+            grid_princ_act.gridx = 2;
             grid_princ_act.gridy = i;
             princ_act.add(name, grid_princ_act);
          
@@ -204,7 +257,7 @@ public class Prep_Materiel extends JPanel {
             scan_1.setForeground(new java.awt.Color(0,156,218));
             scan_1.setPreferredSize(new Dimension(200, 30));
             scan_1.setBorder(new LineBorder(Color.BLUE));
-            grid_princ_act.gridx = 2;
+            grid_princ_act.gridx = 3;
             grid_princ_act.gridy = i;
             princ_act.add(scan_1, grid_princ_act);
             
@@ -218,15 +271,40 @@ public class Prep_Materiel extends JPanel {
             scan_2.setForeground(new java.awt.Color(0,156,218));
             scan_2.setPreferredSize(new Dimension(150, 30));
             scan_2.setBorder(new LineBorder(Color.BLUE));
-            grid_princ_act.gridx = 3;
+            grid_princ_act.gridx = 4;
             grid_princ_act.gridy = i;
             princ_act.add(scan_2, grid_princ_act);
- 
-        }
-                 
-        grid_exci.weighty = 1;
+            
 
-        for (int i = 0; i < 100; i++) {
+                 if (test1 != max & i == var1){
+                     System.out.println("aaa");
+                    for (int j = var1; j*40+40 < max; j++){
+                        quant = new JLabel();
+                        quant.setPreferredSize(new Dimension(40, 30));
+                        grid_princ_act.gridx = 0;
+                        grid_princ_act.gridy = j;
+                        princ_act.add(quant, grid_princ_act);
+                    }
+                 }
+        
+        }
+        grid_exci.weighty = 1;
+        
+        quant = new JLabel();
+        quant.setText("Excipient");
+        quant.setOpaque(true);
+        quant.setHorizontalAlignment(SwingConstants.CENTER); 
+        quant.setFont(new Font("Arial", Font.BOLD, 17));
+        quant.setBackground(new java.awt.Color(0,156,218));
+        quant.setForeground(Color.WHITE);
+        quant.setPreferredSize(new Dimension(150, 30));
+        grid_exci.gridx = 0;
+        grid_exci.gridy = 0;
+        exci.add(quant, grid_exci);
+        
+      
+
+        for (i = 1; i <= var2; i++) {
              
             quant = new JLabel ();
             name = new JLabel ("GENTAMICINE 80mg - 2ml");
@@ -243,7 +321,7 @@ public class Prep_Materiel extends JPanel {
             quant.setForeground(Color.WHITE);
             quant.setPreferredSize(new Dimension(40, 30));
             quant.setBorder(new LineBorder(Color.BLUE));
-            grid_exci.gridx = 0;
+            grid_exci.gridx = 1;
             grid_exci.gridy = i;
             exci.add(quant, grid_exci);
 
@@ -255,7 +333,7 @@ public class Prep_Materiel extends JPanel {
             name.setForeground(Color.WHITE);
             name.setPreferredSize(new Dimension(300, 30));
             name.setBorder(new LineBorder(Color.BLUE));
-            grid_exci.gridx = 1;
+            grid_exci.gridx = 2;
             grid_exci.gridy = i;
             exci.add(name, grid_exci);
          
@@ -267,7 +345,7 @@ public class Prep_Materiel extends JPanel {
             scan_1.setForeground(new java.awt.Color(0,156,218));
             scan_1.setPreferredSize(new Dimension(200, 30));
             scan_1.setBorder(new LineBorder(Color.BLUE));
-            grid_exci.gridx = 2;
+            grid_exci.gridx = 3;
             grid_exci.gridy = i;
             exci.add(scan_1, grid_exci);
             
@@ -281,15 +359,40 @@ public class Prep_Materiel extends JPanel {
             scan_2.setForeground(new java.awt.Color(0,156,218));
             scan_2.setPreferredSize(new Dimension(150, 30));
             scan_2.setBorder(new LineBorder(Color.BLUE));
-            grid_exci.gridx = 3;
+            grid_exci.gridx = 4;
             grid_exci.gridy = i;
             exci.add(scan_2, grid_exci);
+            
+           
+                 if (test2 != max & i == var2){ 
+                     System.out.println("YES");
+                    for (int j = var2; j*40+40 < max; j++){
+                        quant = new JLabel();
+                        quant.setPreferredSize(new Dimension(40, 30));
+                        grid_exci.gridx = 0;
+                        grid_exci.gridy = j;
+                        exci.add(quant, grid_exci);
+                    }
+                 }
  
         }
         
         grid_condi.weighty = 1;
+       
+        quant = new JLabel();
+        quant.setText("Conditionnement");
+        quant.setOpaque(true);
+        quant.setHorizontalAlignment(SwingConstants.CENTER); 
+        quant.setFont(new Font("Arial", Font.BOLD, 17));
+        quant.setBackground(new java.awt.Color(0,156,218));
+        quant.setForeground(Color.WHITE);
+        quant.setPreferredSize(new Dimension(150, 30));
+        grid_condi.gridx = 0;
+        grid_condi.gridy = 0;
+        condi.add(quant, grid_condi);
+        
 
-        for (int i = 0; i < 100; i++) {
+        for (i = 1; i <= var3; i++) {
              
             quant = new JLabel ();
             name = new JLabel ("GENTAMICINE 80mg - 2ml");
@@ -306,7 +409,7 @@ public class Prep_Materiel extends JPanel {
             quant.setForeground(Color.WHITE);
             quant.setPreferredSize(new Dimension(40, 30));
             quant.setBorder(new LineBorder(Color.BLUE));
-            grid_condi.gridx = 0;
+            grid_condi.gridx = 1;
             grid_condi.gridy = i;
             condi.add(quant, grid_condi);
 
@@ -318,7 +421,7 @@ public class Prep_Materiel extends JPanel {
             name.setForeground(Color.WHITE);
             name.setPreferredSize(new Dimension(300, 30));
             name.setBorder(new LineBorder(Color.BLUE));
-            grid_condi.gridx = 1;
+            grid_condi.gridx = 2;
             grid_condi.gridy = i;
             condi.add(name, grid_condi);
          
@@ -330,7 +433,7 @@ public class Prep_Materiel extends JPanel {
             scan_1.setForeground(new java.awt.Color(0,156,218));
             scan_1.setPreferredSize(new Dimension(200, 30));
             scan_1.setBorder(new LineBorder(Color.BLUE));
-            grid_condi.gridx = 2;
+            grid_condi.gridx = 3;
             grid_condi.gridy = i;
             condi.add(scan_1, grid_condi);
             
@@ -344,15 +447,26 @@ public class Prep_Materiel extends JPanel {
             scan_2.setForeground(new java.awt.Color(0,156,218));
             scan_2.setPreferredSize(new Dimension(150, 30));
             scan_2.setBorder(new LineBorder(Color.BLUE));
-            grid_condi.gridx = 3;
+            grid_condi.gridx = 4;
             grid_condi.gridy = i;
             condi.add(scan_2, grid_condi);
+            
+
+                 if (test3 == max & i > var3){
+                    for (var3 = var3; var3*40+40 < max; var3++){
+                        quant = new JLabel();
+                        quant.setPreferredSize(new Dimension(40, 30));
+                        grid_condi.gridx = 0;
+                        grid_condi.gridy = var3;
+                        condi.add(quant, grid_condi);
+                    }
+                 }
  
         }
         
         grid_mat.weighty = 1;
         
-        for (int i = 0; i < 100; i++) {
+        for (i= 0; i < 100; i++) {
              
             quant = new JLabel ();
             name = new JLabel ("GENTAMICINE 80mg - 2ml");

@@ -27,7 +27,7 @@ import javax.swing.border.LineBorder;
 public class Instruction_Fab extends JPanel {
     
     JLabel info;
-    JLabel quant, name, scan_1, l_nece, l_proto, l_etap;
+    JLabel quant, name, scan_1, l_nece, l_proto, l_etap, etiquet;
     JButton b_valider, b_retour, b_photo;
     JScrollBar scroll;
     JPanel protocole, necessaire;
@@ -40,6 +40,7 @@ public class Instruction_Fab extends JPanel {
         name = new JLabel ("GENTAMICINE 80mg - 2ml");
         scan_1 = new JLabel ("SCAN");
         l_etap = new JLabel ();
+        etiquet = new JLabel ("ETIQUETTE");
         b_valider = new JButton ("<html><font size=15 style='Arial' color='white'>Valider</font></html>");
         b_photo = new JButton ("<html><font size=15 style='Arial' color='white'>Photo</font></html>");
         b_retour = new JButton ("<html><font size=15 style='Arial' color='white'>R</font></html>");
@@ -83,15 +84,14 @@ public class Instruction_Fab extends JPanel {
         l_proto.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
         this.add(l_proto);
         
-        l_etap.setBounds((int) (wid/2 + wid*0.5/100), hei*10/100, wid*60/100 - wid*2/100, hei*20/100);
-        l_etap.setBackground(Color.WHITE);
-        l_etap.setOpaque(true);
-        l_etap.setFont(new Font("Arial", Font.PLAIN, 15));
-        l_etap.setHorizontalAlignment( SwingConstants.CENTER);
-        l_etap.setForeground(new java.awt.Color(0,156,218));
-        l_etap.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY, 2));
-        this.add(l_etap);
-        
+        etiquet.setBounds(wid*37/100, hei*10/100, wid*25/100, hei*20/100);
+        etiquet.setOpaque(true);
+        etiquet.setFont(new Font("Arial", Font.BOLD, 30));
+        etiquet.setHorizontalAlignment( SwingConstants.CENTER);
+        etiquet.setForeground(Color.white);
+        etiquet.setBackground(new java.awt.Color(0,156,218));
+        this.add(etiquet);
+      
         b_valider.setBounds(wid*45/100, hei*80/100, wid*10/100, hei*8/100);
         b_valider.setBackground(new java.awt.Color(0,156,218));
         this.add(b_valider);
@@ -106,12 +106,13 @@ public class Instruction_Fab extends JPanel {
         
         necessaire.setBackground(Color.WHITE);
         necessaire.setLayout(new BoxLayout(necessaire, BoxLayout.PAGE_AXIS));
-        necessaire.setBounds((int) (wid*0.5/100), hei*15/100, (int) (wid/2 - wid*0.5/100), hei*60/100);
+        necessaire.setBounds((int) (wid*0.5/100), hei*15/100, (int) (wid/2 - wid*0.5/100), hei*40/100);
         this.add(necessaire);
+       
 
         protocole.setBackground(Color.WHITE);
         protocole.setLayout(new BoxLayout(protocole, BoxLayout.PAGE_AXIS));
-        protocole.setPreferredSize(new Dimension(wid/2 - wid*5/100, 5000));
+        protocole.setPreferredSize(new Dimension(wid*60/100 - wid*5/100, 5000));
         protocole.setAutoscrolls(true);
 
         
@@ -120,7 +121,7 @@ public class Instruction_Fab extends JPanel {
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setBounds(0, hei*15/100, wid*40/100, hei*60/100);
+        scrollPane.setBounds((int) (wid*0.5/100), hei*15/100, (int) (wid*40/100 - wid*0.5/100), hei*40/100);
         
         JScrollPane scrollPane2 = new JScrollPane(protocole);
         scrollPane2.setHorizontalScrollBarPolicy(
@@ -206,9 +207,8 @@ public class Instruction_Fab extends JPanel {
             l_etap.setFont(new Font("Arial", Font.BOLD, 17));
             l_etap.setBackground(Color.WHITE);
             l_etap.setForeground(new java.awt.Color(0,156,218));
-            l_etap.setPreferredSize(new Dimension(40, 30));
+            l_etap.setPreferredSize(new Dimension(wid*60/100, hei*10/100));
             l_etap.setBorder(new LineBorder(Color.BLUE));
-            grid_proto.gridx = 0;
             grid_proto.gridy = i;
             protocole.add(l_etap, grid_proto);
 

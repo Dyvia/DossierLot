@@ -227,7 +227,7 @@ public class Fenetre extends JFrame implements ActionListener,KeyListener, Compo
             Fenetre.this.backAcceuil();
         }
         if (clic.getSource() == access.b_acc_lot){
-            donnees.prepEnCours(access.getNumLot(),access.getNomMed(),access.getQteMed());
+            //donnees.prepEnCours(access.getNumLot(),access.getNomMed(),access.getQteMed());
             Fenetre.this.AccessToEtapes();
         }  
         
