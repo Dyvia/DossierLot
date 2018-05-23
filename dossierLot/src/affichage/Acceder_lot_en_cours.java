@@ -42,9 +42,10 @@ public class Acceder_lot_en_cours extends JPanel{
         
         
         this.setBackground(Color.WHITE);
+        
         scan_eti.setBounds(wid*37/100, hei*10/100, wid*25/100, hei*20/100);
         scan_eti.setOpaque(true);
-        scan_eti.setFont(new Font("Arial", Font.PLAIN, 30));
+        scan_eti.setFont(new Font("Arial", Font.BOLD, 30));
         scan_eti.setHorizontalAlignment( SwingConstants.CENTER);
         scan_eti.setForeground(Color.white);
         scan_eti.setBackground(new java.awt.Color(0,156,218));
