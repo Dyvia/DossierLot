@@ -18,9 +18,7 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
  
  
@@ -34,10 +32,12 @@ public class Fenetre extends JFrame implements ActionListener,KeyListener, Compo
     Gestion_prot gest_prot = new Gestion_prot();
     
     Etapes etapes;
+    
     Fab_Etapes fab_etapes;
     Stockage stockage = new Stockage();
     
     Prep_Materiel prep_materiel;
+    Instruction_Fab instruction_fab;
 
     private Donnees donnees;
    
@@ -117,6 +117,10 @@ public class Fenetre extends JFrame implements ActionListener,KeyListener, Compo
         //Prep_Materiel
         prep_materiel = new Prep_Materiel(w, h);
         this.prep_materiel.b_retour.addActionListener(this);
+        
+        //Instruction_Fab
+        instruction_fab = new Instruction_Fab(w, h);
+        this.instruction_fab.b_retour.addActionListener(this);
 
         this.setContentPane(acceuil);
         
@@ -188,6 +192,11 @@ public class Fenetre extends JFrame implements ActionListener,KeyListener, Compo
     //Fab_Etapes
     public void Fab_EtapeToPrep_Materiel(){
         this.setContentPane(this.prep_materiel);
+        this.revalidate();
+    }
+    
+    public void Fab_EtapeToInstruction_Fab(){
+        this.setContentPane(this.instruction_fab);
         this.revalidate();
     }
     
@@ -270,6 +279,9 @@ public class Fenetre extends JFrame implements ActionListener,KeyListener, Compo
             prep_materiel.initialisation();
             Fenetre.this.Fab_EtapeToPrep_Materiel();
         }
+        if (clic.getSource() == fab_etapes.b_inst_fab){
+            Fenetre.this.Fab_EtapeToInstruction_Fab();
+        }
         if (clic.getSource() == fab_etapes.b_retour){
             Fenetre.this.backEtapes();
         }
@@ -284,6 +296,11 @@ public class Fenetre extends JFrame implements ActionListener,KeyListener, Compo
         
         //Prep_Materiel
         if (clic.getSource() == prep_materiel.b_retour){
+            Fenetre.this.backFabEtapes();
+        }
+        
+        //Instruction_Fab
+        if (clic.getSource() == instruction_fab.b_retour){
             Fenetre.this.backFabEtapes();
         }
 
@@ -316,22 +333,22 @@ public class Fenetre extends JFrame implements ActionListener,KeyListener, Compo
 
     @Override
     public void componentResized(ComponentEvent e) {
-        System.out.println("Resized");
+        //System.out.println("Resized");
     }
 
     @Override
     public void componentMoved(ComponentEvent e) {
-        System.out.println("Resized");    
+        //System.out.println("Resized");    
     }
 
     @Override
     public void componentShown(ComponentEvent e) {
-        System.out.println("Resized");
+        //System.out.println("Resized");
     }
 
     @Override
     public void componentHidden(ComponentEvent e) {
-        System.out.println("Resized");
+        //System.out.println("Resized");
     }
     
    
