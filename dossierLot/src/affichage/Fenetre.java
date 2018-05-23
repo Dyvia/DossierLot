@@ -266,6 +266,8 @@ public class Fenetre extends JFrame implements ActionListener,KeyListener, Compo
         
         //Fab_Etapes
         if (clic.getSource() == fab_etapes.b_prep_mat){
+            this.prep_materiel.protocole(this.donnees.getPrepEnCours().getMedicament().getFabProtocole());
+            prep_materiel.initialisation();
             Fenetre.this.Fab_EtapeToPrep_Materiel();
         }
         if (clic.getSource() == fab_etapes.b_retour){

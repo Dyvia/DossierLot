@@ -29,6 +29,12 @@ public class Preparation {
         this.qte=Integer.parseInt(qteMed);
     }
 
+    public Medicament getMedicament() {
+        return medicament;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "Preparation{" + "numLot=" + numLot + ", numOrd=" + numOrd + ", qte=" + qte + ", datePrep=" + datePrep + ", dateLim=" + dateLim + ", photo=" + photo + ", etiquette=" + etiquette + ", medicament=" + medicament + '}';

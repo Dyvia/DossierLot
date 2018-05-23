@@ -258,4 +258,8 @@ public class Donnees {
         this.prepEnCours=new Preparation(numLot,getItemNomme(nomMed),qteMed);
         System.out.println(this.prepEnCours);
     }
+
+    public Preparation getPrepEnCours() {
+        return prepEnCours;
+    }
 }
