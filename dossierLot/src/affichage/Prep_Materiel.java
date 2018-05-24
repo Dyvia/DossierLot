@@ -98,7 +98,6 @@ public class Prep_Materiel extends JPanel {
         if (test2 < test3){
             max = test3;
         }
-        System.out.println("max : " + max);
         max = max + 40;
         
         this.setBackground(Color.WHITE);
@@ -279,7 +278,6 @@ public class Prep_Materiel extends JPanel {
                 princ_act.add(scan_2, grid_princ_act);
             
                 if (test1 != max & i == protocole.getNbChimique()){
-                    System.out.println("aaa");
                    for (int j = i+1; j*40+40 < max; j++){
                        quant = new JLabel();
                        quant.setPreferredSize(new Dimension(40, 30));
@@ -319,7 +317,6 @@ public class Prep_Materiel extends JPanel {
         bool = true;
         k = 1;
         for (i = 1; i <= protocole.getNbExcipient(); i++) {
-            System.out.println(" exci - i : " + i);
             
             while (bool){
                 
@@ -339,7 +336,6 @@ public class Prep_Materiel extends JPanel {
                     quant.setPreferredSize(new Dimension(40, 30));
                     quant.setBorder(new LineBorder(Color.BLUE));
                     grid_exci.gridx = 1;
-                    System.out.println("i : " + i);
                     grid_exci.gridy = i;
                     exci.add(quant, grid_exci);
 
@@ -378,8 +374,7 @@ public class Prep_Materiel extends JPanel {
                     grid_exci.gridy = i;
                     exci.add(scan_2, grid_exci);
 
-                    if (test2 != max & i == protocole.getNbExcipient()){ 
-                       System.out.println("YES");
+                    if (test2 != max & i == protocole.getNbExcipient()){
                        for (int j = i+1; j*40+40 < max; j++){
                            quant = new JLabel();
                            quant.setPreferredSize(new Dimension(40, 30));
@@ -418,9 +413,7 @@ public class Prep_Materiel extends JPanel {
         bool = true;
         k = 1;
         for (i = 1; i <= var3; i++) {
-            System.out.println(" condi - i : " + i);
-            
-            
+
             while (bool){
                 
                 if(protocole.getNecessaire().get(k-1).getType()==4){
@@ -502,8 +495,6 @@ public class Prep_Materiel extends JPanel {
         bool = true;
         k = 0;
         for (i = 0; i <protocole.getNbMateriel(); i++) {
-            System.out.println(" mat - i : " + i);
-            System.out.println(" mat - k : " + k);
             if (i < protocole.getNbMateriel()){
                 bool = true;
             }
@@ -514,7 +505,6 @@ public class Prep_Materiel extends JPanel {
 
                     quant = new JLabel (Float.toString(protocole.getNecessaire().get(k).getQte()));
                     name = new JLabel (protocole.getNecessaire().get(k).getNom());
-                    System.out.println(protocole.getNecessaire().get(k).getNom());
                     scan_1 = new JLabel ("SCAN");
                     scan_2 = new JLabel ("SCAN");
 

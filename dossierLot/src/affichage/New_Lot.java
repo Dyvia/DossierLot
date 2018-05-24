@@ -122,7 +122,6 @@ public class New_Lot extends JPanel{
         f.mkdir();
         String numLot=dateFormat.format(aujourdhui)+lettre;
         
-        File file=new File("C://Users//dyvia//OneDrive//Bureau//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//doc.pdf");
         File file=new File("D://Users//Kenny//Documents//IUT//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//doc.pdf");
         PDDocument doc = new PDDocument().load(file);
         PDDocumentCatalog docCatalog = doc.getDocumentCatalog();
@@ -136,15 +135,12 @@ public class New_Lot extends JPanel{
         barcode.setData("~"+numLot+"#"+list_med.getSelectedItem().toString()+"#"+qt.getText().toString()+"#");
  
 
-        barcode.renderBarcode("C://Users//dyvia//OneDrive//Bureau//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//"+numLot+".gif");
         barcode.renderBarcode("D://Users//Kenny//Documents//IUT//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//"+numLot+".gif");
        
         
-        file=new File("C://Users//dyvia//OneDrive//Bureau//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//doc.pdf");
         file=new File("D://Users//Kenny//Documents//IUT//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//doc.pdf");
         doc = new PDDocument().load(file);
         PDPage page = doc.getPage(0);
-        PDImageXObject pdImage = PDImageXObject.createFromFile("C://Users//dyvia//OneDrive//Bureau//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//"+numLot+".gif",doc);
         PDImageXObject pdImage = PDImageXObject.createFromFile("D://Users//Kenny//Documents//IUT//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//"+numLot+".gif",doc);
         PDPageContentStream contents = new PDPageContentStream(doc, page);
         //Drawing the image in the PDF document
@@ -155,7 +151,6 @@ public class New_Lot extends JPanel{
         //Closing the PDPageContentStream object
         contents.close();
         
-        doc.save("C://Users//dyvia//OneDrive//Bureau//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//"+numLot+"//etiquette.pdf");
         doc.save("D://Users//Kenny//Documents//IUT//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//"+numLot+"//etiquette.pdf");
         doc.close();
         
