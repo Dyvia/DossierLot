@@ -34,6 +34,10 @@ public class DossierLot {
         donnees.setCheminJSON("C://Users//dyvia//OneDrive//Bureau//Stage//Projets//Gestion_de_lots_dématérialisée//Données//");
         donnees.setCheminLots("C://Users//dyvia//OneDrive//Bureau//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//");
         donnees.setCheminPDF("C://Users//dyvia//OneDrive//Bureau//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//");
+        donnees.setCheminJSON("D://Users//Kenny//Documents//IUT//Stage//Projets//Gestion_de_lots_dématérialisée//Données//");
+        System.out.println(donnees.getCheminJSON());
+        donnees.setCheminLots("D://Users//Kenny//Documents//IUT//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//");
+        donnees.setCheminPDF("D://Users//Kenny//Documents//IUT//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//");
         donnees.parseJSONMedicaments();
         System.out.println(donnees.getNomMedicaments());
         

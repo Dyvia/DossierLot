@@ -123,6 +123,7 @@ public class New_Lot extends JPanel{
         String numLot=dateFormat.format(aujourdhui)+lettre;
         
         File file=new File("C://Users//dyvia//OneDrive//Bureau//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//doc.pdf");
+        File file=new File("D://Users//Kenny//Documents//IUT//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//doc.pdf");
         PDDocument doc = new PDDocument().load(file);
         PDDocumentCatalog docCatalog = doc.getDocumentCatalog();
         PDAcroForm acroForm = docCatalog.getAcroForm();
@@ -136,12 +137,15 @@ public class New_Lot extends JPanel{
  
 
         barcode.renderBarcode("C://Users//dyvia//OneDrive//Bureau//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//"+numLot+".gif");
+        barcode.renderBarcode("D://Users//Kenny//Documents//IUT//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//"+numLot+".gif");
        
         
         file=new File("C://Users//dyvia//OneDrive//Bureau//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//doc.pdf");
+        file=new File("D://Users//Kenny//Documents//IUT//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//doc.pdf");
         doc = new PDDocument().load(file);
         PDPage page = doc.getPage(0);
         PDImageXObject pdImage = PDImageXObject.createFromFile("C://Users//dyvia//OneDrive//Bureau//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//"+numLot+".gif",doc);
+        PDImageXObject pdImage = PDImageXObject.createFromFile("D://Users//Kenny//Documents//IUT//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//"+numLot+".gif",doc);
         PDPageContentStream contents = new PDPageContentStream(doc, page);
         //Drawing the image in the PDF document
         contents.drawImage(pdImage, 70, 250);
@@ -152,6 +156,7 @@ public class New_Lot extends JPanel{
         contents.close();
         
         doc.save("C://Users//dyvia//OneDrive//Bureau//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//"+numLot+"//etiquette.pdf");
+        doc.save("D://Users//Kenny//Documents//IUT//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//"+numLot+"//etiquette.pdf");
         doc.close();
         
         num.setText("<html><b>"+numLot+"</b></html>");
