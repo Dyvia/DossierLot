@@ -62,25 +62,26 @@ public class Prep_Materiel extends JPanel {
     
     public void initialisation(){
         
-        int var1 = 2;
-        int var2 = 10;
-        int var3= 50;
+        //int var1 = 2;
+        //int var2 = 10;
+        int var3= 1;
         
         int max;
         
         int test1;
-        if (var1*40+40 < hei*28/100){
+        
+        if (protocole.getNbChimique()*40+40 < hei*28/100){
             test1 = hei*28/100;
         }
-        else { test1 = var1*40+40; }
+        else { test1 = protocole.getNbChimique()*40+40; }
         
         max = test1;
         
         int test2;
-        if (var2*40+40 < hei*28/100){
+        if (protocole.getNbExcipient()*40+40 < hei*28/100){
             test2 = hei*28/100;
         }
-        else { test2 = var2*40+40; }
+        else { test2 = protocole.getNbExcipient()*40+40; }
         
         if (test1 < test2){
             max = test2;
@@ -95,7 +96,7 @@ public class Prep_Materiel extends JPanel {
         if (test2 < test3){
             max = test3;
         }
-        
+        System.out.println("max : " + max);
         max = max + 40;
         
         this.setBackground(Color.WHITE);
@@ -205,10 +206,11 @@ public class Prep_Materiel extends JPanel {
         GridBagConstraints grid_condi = new GridBagConstraints();
         GridBagConstraints grid_mat = new GridBagConstraints();
         
-        grid_princ_act.weighty = 1;
+        
 
-<<<<<<< HEAD
-        int i = 0;
+        int i =0;
+        
+        grid_princ_act.weighty = 1;
         
         quant = new JLabel();
         quant.setText("Principe actif");
@@ -222,62 +224,17 @@ public class Prep_Materiel extends JPanel {
         grid_princ_act.gridy = 0;
         princ_act.add(quant, grid_princ_act);
                
-        for (i = 1; i <= var1; i++) {
-             
-            quant = new JLabel ();
-            name = new JLabel ("GENTAMICINE 80mg - 2ml");
-            scan_1 = new JLabel ("SCAN");
-            scan_2 = new JLabel ("SCAN");
-
-            grid_princ_act.weightx = 0;
-    
-            quant.setText("" + i);
-            quant.setOpaque(true);
-            quant.setHorizontalAlignment(SwingConstants.CENTER); 
-            quant.setFont(new Font("Arial", Font.BOLD, 17));
-            quant.setBackground(new java.awt.Color(0,156,218));
-            quant.setForeground(Color.WHITE);
-            quant.setPreferredSize(new Dimension(40, 30));
-            quant.setBorder(new LineBorder(Color.BLUE));
-            grid_princ_act.gridx = 1;
-            grid_princ_act.gridy = i;
-            princ_act.add(quant, grid_princ_act);
-                        
-            name.setText("GENTAMICINE 80mg - 2ml");
-            name.setOpaque(true);
-            name.setHorizontalAlignment(SwingConstants.CENTER); 
-            name.setFont(new Font("Arial", Font.PLAIN, 17));
-            name.setBackground(new java.awt.Color(0,156,218));
-            name.setForeground(Color.WHITE);
-            name.setPreferredSize(new Dimension(300, 30));
-            name.setBorder(new LineBorder(Color.BLUE));
-            grid_princ_act.gridx = 2;
-            grid_princ_act.gridy = i;
-            princ_act.add(name, grid_princ_act);
-         
-            scan_1.setText("SCAN");
-            scan_1.setOpaque(true);
-            scan_1.setHorizontalAlignment(SwingConstants.CENTER); 
-            scan_1.setFont(new Font("Arial", Font.PLAIN, 17));
-            scan_1.setBackground(Color.WHITE);
-            scan_1.setForeground(new java.awt.Color(0,156,218));
-            scan_1.setPreferredSize(new Dimension(200, 30));
-            scan_1.setBorder(new LineBorder(Color.BLUE));
-            grid_princ_act.gridx = 3;
-            grid_princ_act.gridy = i;
-            princ_act.add(scan_1, grid_princ_act);
-=======
-        for (int i = 0; i < protocole.getNecessaire().size(); i++) {
-            
-            if(protocole.getNecessaire().get(i).getType()==1){
-                quant = new JLabel (Float.toString(protocole.getNecessaire().get(i).getQte()));
-                name = new JLabel (protocole.getNecessaire().get(i).getNom());
+        for (i = 1; i < protocole.getNecessaire().size(); i++) {
+  
+            if(protocole.getNecessaire().get(i-1).getType()== 1){
+                quant = new JLabel (Float.toString(protocole.getNecessaire().get(i-1).getQte()));
+                name = new JLabel (protocole.getNecessaire().get(i-1).getNom());
                 scan_1 = new JLabel ("SCAN");
                 scan_2 = new JLabel ("SCAN");
 
                 grid_princ_act.weightx = 0;
-
-                
+    
+       
                 quant.setOpaque(true);
                 quant.setHorizontalAlignment(SwingConstants.CENTER); 
                 quant.setFont(new Font("Arial", Font.BOLD, 17));
@@ -285,11 +242,11 @@ public class Prep_Materiel extends JPanel {
                 quant.setForeground(Color.WHITE);
                 quant.setPreferredSize(new Dimension(40, 30));
                 quant.setBorder(new LineBorder(Color.BLUE));
-                grid_princ_act.gridx = 0;
+                grid_princ_act.gridx = 1;
                 grid_princ_act.gridy = i;
                 princ_act.add(quant, grid_princ_act);
 
-                
+
                 name.setOpaque(true);
                 name.setHorizontalAlignment(SwingConstants.CENTER); 
                 name.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -297,11 +254,11 @@ public class Prep_Materiel extends JPanel {
                 name.setForeground(Color.WHITE);
                 name.setPreferredSize(new Dimension(300, 30));
                 name.setBorder(new LineBorder(Color.BLUE));
-                grid_princ_act.gridx = 1;
+                grid_princ_act.gridx = 2;
                 grid_princ_act.gridy = i;
                 princ_act.add(name, grid_princ_act);
 
-                scan_1.setText("SCAN");
+
                 scan_1.setOpaque(true);
                 scan_1.setHorizontalAlignment(SwingConstants.CENTER); 
                 scan_1.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -309,13 +266,11 @@ public class Prep_Materiel extends JPanel {
                 scan_1.setForeground(new java.awt.Color(0,156,218));
                 scan_1.setPreferredSize(new Dimension(200, 30));
                 scan_1.setBorder(new LineBorder(Color.BLUE));
-                grid_princ_act.gridx = 2;
+                grid_princ_act.gridx = 3;
                 grid_princ_act.gridy = i;
                 princ_act.add(scan_1, grid_princ_act);
 
-                grid_princ_act.fill = GridBagConstraints.HORIZONTAL;
 
-                scan_2.setText("SCAN");
                 scan_2.setOpaque(true);
                 scan_2.setHorizontalAlignment(SwingConstants.CENTER); 
                 scan_2.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -323,43 +278,30 @@ public class Prep_Materiel extends JPanel {
                 scan_2.setForeground(new java.awt.Color(0,156,218));
                 scan_2.setPreferredSize(new Dimension(150, 30));
                 scan_2.setBorder(new LineBorder(Color.BLUE));
-                grid_princ_act.gridx = 3;
+                grid_princ_act.gridx = 4;
                 grid_princ_act.gridy = i;
                 princ_act.add(scan_2, grid_princ_act);
->>>>>>> d65076466a4941d80089177d75173fd2c38346cb
             
-            
-<<<<<<< HEAD
-            scan_2.setText("SCAN");
-            scan_2.setOpaque(true);
-            scan_2.setHorizontalAlignment(SwingConstants.CENTER); 
-            scan_2.setFont(new Font("Arial", Font.PLAIN, 17));
-            scan_2.setBackground(Color.WHITE);
-            scan_2.setForeground(new java.awt.Color(0,156,218));
-            scan_2.setPreferredSize(new Dimension(150, 30));
-            scan_2.setBorder(new LineBorder(Color.BLUE));
-            grid_princ_act.gridx = 4;
-            grid_princ_act.gridy = i;
-            princ_act.add(scan_2, grid_princ_act);
-            
-
-                 if (test1 != max & i == var1){
-                     System.out.println("aaa");
-                    for (int j = var1; j*40+40 < max; j++){
-                        quant = new JLabel();
-                        quant.setPreferredSize(new Dimension(40, 30));
-                        grid_princ_act.gridx = 0;
-                        grid_princ_act.gridy = j;
-                        princ_act.add(quant, grid_princ_act);
-                    }
-                 }
-        
-=======
+                System.out.println("test1 : " + test1 + "max : " + max + "i : " + i);
+                if (test1 != max & i == protocole.getNbChimique()){
+                    System.out.println("aaa");
+                   for (int j = protocole.getNbChimique(); j*40+40 < max; j++){
+                       quant = new JLabel();
+                       quant.setPreferredSize(new Dimension(40, 30));
+                       grid_princ_act.gridx = 0;
+                       grid_princ_act.gridy = j;
+                       princ_act.add(quant, grid_princ_act);
+                   }
+                }
+                 
+                if (protocole.getNbChimique() < 4){
+                    scrollPane.setVerticalScrollBarPolicy(
+                        JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+                }
             }
-            
- 
->>>>>>> d65076466a4941d80089177d75173fd2c38346cb
         }
+            
+            
         grid_exci.weighty = 1;
         
         quant = new JLabel();
@@ -373,91 +315,17 @@ public class Prep_Materiel extends JPanel {
         grid_exci.gridx = 0;
         grid_exci.gridy = 0;
         exci.add(quant, grid_exci);
-        
-      
 
-<<<<<<< HEAD
-        for (i = 1; i <= var2; i++) {
-             
-            quant = new JLabel ();
-            name = new JLabel ("GENTAMICINE 80mg - 2ml");
-            scan_1 = new JLabel ("SCAN");
-            scan_2 = new JLabel ("SCAN");
-
-            grid_exci.weightx = 0;
-    
-            quant.setText("" + i);
-            quant.setOpaque(true);
-            quant.setHorizontalAlignment(SwingConstants.CENTER); 
-            quant.setFont(new Font("Arial", Font.BOLD, 17));
-            quant.setBackground(new java.awt.Color(0,156,218));
-            quant.setForeground(Color.WHITE);
-            quant.setPreferredSize(new Dimension(40, 30));
-            quant.setBorder(new LineBorder(Color.BLUE));
-            grid_exci.gridx = 1;
-            grid_exci.gridy = i;
-            exci.add(quant, grid_exci);
-
-            name.setText("GENTAMICINE 80mg - 2ml");
-            name.setOpaque(true);
-            name.setHorizontalAlignment(SwingConstants.CENTER); 
-            name.setFont(new Font("Arial", Font.PLAIN, 17));
-            name.setBackground(new java.awt.Color(0,156,218));
-            name.setForeground(Color.WHITE);
-            name.setPreferredSize(new Dimension(300, 30));
-            name.setBorder(new LineBorder(Color.BLUE));
-            grid_exci.gridx = 2;
-            grid_exci.gridy = i;
-            exci.add(name, grid_exci);
-         
-            scan_1.setText("SCAN");
-            scan_1.setOpaque(true);
-            scan_1.setHorizontalAlignment(SwingConstants.CENTER); 
-            scan_1.setFont(new Font("Arial", Font.PLAIN, 17));
-            scan_1.setBackground(Color.WHITE);
-            scan_1.setForeground(new java.awt.Color(0,156,218));
-            scan_1.setPreferredSize(new Dimension(200, 30));
-            scan_1.setBorder(new LineBorder(Color.BLUE));
-            grid_exci.gridx = 3;
-            grid_exci.gridy = i;
-            exci.add(scan_1, grid_exci);
-            
-            grid_exci.fill = GridBagConstraints.HORIZONTAL;
-            
-            scan_2.setText("SCAN");
-            scan_2.setOpaque(true);
-            scan_2.setHorizontalAlignment(SwingConstants.CENTER); 
-            scan_2.setFont(new Font("Arial", Font.PLAIN, 17));
-            scan_2.setBackground(Color.WHITE);
-            scan_2.setForeground(new java.awt.Color(0,156,218));
-            scan_2.setPreferredSize(new Dimension(150, 30));
-            scan_2.setBorder(new LineBorder(Color.BLUE));
-            grid_exci.gridx = 4;
-            grid_exci.gridy = i;
-            exci.add(scan_2, grid_exci);
-            
-           
-                 if (test2 != max & i == var2){ 
-                     System.out.println("YES");
-                    for (int j = var2; j*40+40 < max; j++){
-                        quant = new JLabel();
-                        quant.setPreferredSize(new Dimension(40, 30));
-                        grid_exci.gridx = 0;
-                        grid_exci.gridy = j;
-                        exci.add(quant, grid_exci);
-                    }
-                 }
-=======
-        for (int i = 0; i < protocole.getNecessaire().size(); i++) {
-            if(protocole.getNecessaire().get(i).getType()==2){
-               quant = new JLabel (Float.toString(protocole.getNecessaire().get(i).getQte()));
-                name = new JLabel (protocole.getNecessaire().get(i).getNom());
+        for (i = 1; i < protocole.getNecessaire().size(); i++) {
+System.out.println("noooooooooooo");
+            if(protocole.getNecessaire().get(i-1).getType()==2){
+                quant = new JLabel (Float.toString(protocole.getNecessaire().get(i-1).getQte()));
+                name = new JLabel (protocole.getNecessaire().get(i-1).getNom());
                 scan_1 = new JLabel ("SCAN");
                 scan_2 = new JLabel ("SCAN");
 
                 grid_exci.weightx = 0;
 
-                
                 quant.setOpaque(true);
                 quant.setHorizontalAlignment(SwingConstants.CENTER); 
                 quant.setFont(new Font("Arial", Font.BOLD, 17));
@@ -465,10 +333,12 @@ public class Prep_Materiel extends JPanel {
                 quant.setForeground(Color.WHITE);
                 quant.setPreferredSize(new Dimension(40, 30));
                 quant.setBorder(new LineBorder(Color.BLUE));
-                grid_exci.gridx = 0;
+                grid_exci.gridx = 1;
+                System.out.println("i : " + i);
                 grid_exci.gridy = i;
                 exci.add(quant, grid_exci);
 
+ 
                 name.setOpaque(true);
                 name.setHorizontalAlignment(SwingConstants.CENTER); 
                 name.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -476,11 +346,11 @@ public class Prep_Materiel extends JPanel {
                 name.setForeground(Color.WHITE);
                 name.setPreferredSize(new Dimension(300, 30));
                 name.setBorder(new LineBorder(Color.BLUE));
-                grid_exci.gridx = 1;
+                grid_exci.gridx = 2;
                 grid_exci.gridy = i;
                 exci.add(name, grid_exci);
 
-                scan_1.setText("SCAN");
+     
                 scan_1.setOpaque(true);
                 scan_1.setHorizontalAlignment(SwingConstants.CENTER); 
                 scan_1.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -488,13 +358,12 @@ public class Prep_Materiel extends JPanel {
                 scan_1.setForeground(new java.awt.Color(0,156,218));
                 scan_1.setPreferredSize(new Dimension(200, 30));
                 scan_1.setBorder(new LineBorder(Color.BLUE));
-                grid_exci.gridx = 2;
+                grid_exci.gridx = 3;
                 grid_exci.gridy = i;
                 exci.add(scan_1, grid_exci);
 
                 grid_exci.fill = GridBagConstraints.HORIZONTAL;
 
-                scan_2.setText("SCAN");
                 scan_2.setOpaque(true);
                 scan_2.setHorizontalAlignment(SwingConstants.CENTER); 
                 scan_2.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -502,12 +371,27 @@ public class Prep_Materiel extends JPanel {
                 scan_2.setForeground(new java.awt.Color(0,156,218));
                 scan_2.setPreferredSize(new Dimension(150, 30));
                 scan_2.setBorder(new LineBorder(Color.BLUE));
-                grid_exci.gridx = 3;
+                grid_exci.gridx = 4;
                 grid_exci.gridy = i;
                 exci.add(scan_2, grid_exci);
+            
+                System.out.println("test2 : " + test2 + "max : " + max + "i : " + i);
+                if (test2 != max & i-1 == protocole.getNbExcipient()){ 
+                   System.out.println("YES");
+                   for (int j = protocole.getNbExcipient(); j*40+40 < max; j++){
+                       quant = new JLabel();
+                       quant.setPreferredSize(new Dimension(40, 30));
+                       grid_exci.gridx = 0;
+                       grid_exci.gridy = j;
+                       exci.add(quant, grid_exci);
+                   }
+                }
+                 
+                if (protocole.getNbExcipient()< 4){
+                   scrollPane2.setVerticalScrollBarPolicy(
+                       JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+                }
             }
->>>>>>> d65076466a4941d80089177d75173fd2c38346cb
- 
         }
         
         grid_condi.weighty = 1;
@@ -525,89 +409,17 @@ public class Prep_Materiel extends JPanel {
         condi.add(quant, grid_condi);
         
 
-<<<<<<< HEAD
-        for (i = 1; i <= var3; i++) {
-             
-            quant = new JLabel ();
-            name = new JLabel ("GENTAMICINE 80mg - 2ml");
-            scan_1 = new JLabel ("SCAN");
-            scan_2 = new JLabel ("SCAN");
-
-            grid_condi.weightx = 0;
-    
-            quant.setText("" + i);
-            quant.setOpaque(true);
-            quant.setHorizontalAlignment(SwingConstants.CENTER); 
-            quant.setFont(new Font("Arial", Font.BOLD, 17));
-            quant.setBackground(new java.awt.Color(0,156,218));
-            quant.setForeground(Color.WHITE);
-            quant.setPreferredSize(new Dimension(40, 30));
-            quant.setBorder(new LineBorder(Color.BLUE));
-            grid_condi.gridx = 1;
-            grid_condi.gridy = i;
-            condi.add(quant, grid_condi);
-
-            name.setText("GENTAMICINE 80mg - 2ml");
-            name.setOpaque(true);
-            name.setHorizontalAlignment(SwingConstants.CENTER); 
-            name.setFont(new Font("Arial", Font.PLAIN, 17));
-            name.setBackground(new java.awt.Color(0,156,218));
-            name.setForeground(Color.WHITE);
-            name.setPreferredSize(new Dimension(300, 30));
-            name.setBorder(new LineBorder(Color.BLUE));
-            grid_condi.gridx = 2;
-            grid_condi.gridy = i;
-            condi.add(name, grid_condi);
-         
-            scan_1.setText("SCAN");
-            scan_1.setOpaque(true);
-            scan_1.setHorizontalAlignment(SwingConstants.CENTER); 
-            scan_1.setFont(new Font("Arial", Font.PLAIN, 17));
-            scan_1.setBackground(Color.WHITE);
-            scan_1.setForeground(new java.awt.Color(0,156,218));
-            scan_1.setPreferredSize(new Dimension(200, 30));
-            scan_1.setBorder(new LineBorder(Color.BLUE));
-            grid_condi.gridx = 3;
-            grid_condi.gridy = i;
-            condi.add(scan_1, grid_condi);
-=======
-        for (int i = 0; i < protocole.getNecessaire().size(); i++) {
->>>>>>> d65076466a4941d80089177d75173fd2c38346cb
-            
-            if(protocole.getNecessaire().get(i).getType()==4){
-            
-<<<<<<< HEAD
-            scan_2.setText("SCAN");
-            scan_2.setOpaque(true);
-            scan_2.setHorizontalAlignment(SwingConstants.CENTER); 
-            scan_2.setFont(new Font("Arial", Font.PLAIN, 17));
-            scan_2.setBackground(Color.WHITE);
-            scan_2.setForeground(new java.awt.Color(0,156,218));
-            scan_2.setPreferredSize(new Dimension(150, 30));
-            scan_2.setBorder(new LineBorder(Color.BLUE));
-            grid_condi.gridx = 4;
-            grid_condi.gridy = i;
-            condi.add(scan_2, grid_condi);
-            
-
-                 if (test3 == max & i > var3){
-                    for (var3 = var3; var3*40+40 < max; var3++){
-                        quant = new JLabel();
-                        quant.setPreferredSize(new Dimension(40, 30));
-                        grid_condi.gridx = 0;
-                        grid_condi.gridy = var3;
-                        condi.add(quant, grid_condi);
-                    }
-                 }
-=======
-                quant = new JLabel (Float.toString(protocole.getNecessaire().get(i).getQte()));
-                name = new JLabel (protocole.getNecessaire().get(i).getNom());
+        for (i = 1; i < protocole.getNecessaire().size(); i++) {
+ 
+            if(protocole.getNecessaire().get(i-1).getType()==4){
+                
+                quant = new JLabel (Float.toString(protocole.getNecessaire().get(i-1).getQte()));
+                name = new JLabel (protocole.getNecessaire().get(i-1).getNom());
                 scan_1 = new JLabel ("SCAN");
                 scan_2 = new JLabel ("SCAN");
 
                 grid_condi.weightx = 0;
 
-               
                 quant.setOpaque(true);
                 quant.setHorizontalAlignment(SwingConstants.CENTER); 
                 quant.setFont(new Font("Arial", Font.BOLD, 17));
@@ -615,11 +427,11 @@ public class Prep_Materiel extends JPanel {
                 quant.setForeground(Color.WHITE);
                 quant.setPreferredSize(new Dimension(40, 30));
                 quant.setBorder(new LineBorder(Color.BLUE));
-                grid_condi.gridx = 0;
+                grid_condi.gridx = 1;
                 grid_condi.gridy = i;
                 condi.add(quant, grid_condi);
 
-                
+             
                 name.setOpaque(true);
                 name.setHorizontalAlignment(SwingConstants.CENTER); 
                 name.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -627,11 +439,11 @@ public class Prep_Materiel extends JPanel {
                 name.setForeground(Color.WHITE);
                 name.setPreferredSize(new Dimension(300, 30));
                 name.setBorder(new LineBorder(Color.BLUE));
-                grid_condi.gridx = 1;
+                grid_condi.gridx = 2;
                 grid_condi.gridy = i;
                 condi.add(name, grid_condi);
 
-                scan_1.setText("SCAN");
+           
                 scan_1.setOpaque(true);
                 scan_1.setHorizontalAlignment(SwingConstants.CENTER); 
                 scan_1.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -639,13 +451,11 @@ public class Prep_Materiel extends JPanel {
                 scan_1.setForeground(new java.awt.Color(0,156,218));
                 scan_1.setPreferredSize(new Dimension(200, 30));
                 scan_1.setBorder(new LineBorder(Color.BLUE));
-                grid_condi.gridx = 2;
+                grid_condi.gridx = 3;
                 grid_condi.gridy = i;
                 condi.add(scan_1, grid_condi);
 
-                grid_condi.fill = GridBagConstraints.HORIZONTAL;
-
-                scan_2.setText("SCAN");
+                
                 scan_2.setOpaque(true);
                 scan_2.setHorizontalAlignment(SwingConstants.CENTER); 
                 scan_2.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -653,23 +463,33 @@ public class Prep_Materiel extends JPanel {
                 scan_2.setForeground(new java.awt.Color(0,156,218));
                 scan_2.setPreferredSize(new Dimension(150, 30));
                 scan_2.setBorder(new LineBorder(Color.BLUE));
-                grid_condi.gridx = 3;
+                grid_condi.gridx = 4;
                 grid_condi.gridy = i;
                 condi.add(scan_2, grid_condi);
+
+
+                if (test3 != max & i > var3){
+                   for (int j = var3; j*40+40 < max; j++){
+                       quant = new JLabel();
+                       quant.setPreferredSize(new Dimension(40, 30));
+                       grid_condi.gridx = 0;
+                       grid_condi.gridy = j;
+                       condi.add(quant, grid_condi);
+                   }
+                }
+                
+                if (var3 < 4){
+                    scrollPane3.setVerticalScrollBarPolicy(
+                        JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+                }
             }
->>>>>>> d65076466a4941d80089177d75173fd2c38346cb
- 
         }
-        
+
         grid_mat.weighty = 1;
-        
-<<<<<<< HEAD
-        for (i= 0; i < 100; i++) {
-=======
-        for (int i = 0; i <protocole.getNecessaire().size(); i++) {
+ 
+        for (i = 0; i <protocole.getNbMateriel(); i++) {
             
             if(protocole.getNecessaire().get(i).getType()==3){
->>>>>>> d65076466a4941d80089177d75173fd2c38346cb
              
                 quant = new JLabel (Float.toString(protocole.getNecessaire().get(i).getQte()));
                 name = new JLabel (protocole.getNecessaire().get(i).getNom());
@@ -677,7 +497,6 @@ public class Prep_Materiel extends JPanel {
                 scan_2 = new JLabel ("SCAN");
 
                 grid_mat.weightx = 0;
-
                 
                 quant.setOpaque(true);
                 quant.setHorizontalAlignment(SwingConstants.CENTER); 
@@ -702,7 +521,6 @@ public class Prep_Materiel extends JPanel {
                 grid_mat.gridy = i;
                 mat.add(name, grid_mat);
 
-                scan_1.setText("SCAN");
                 scan_1.setOpaque(true);
                 scan_1.setHorizontalAlignment(SwingConstants.CENTER); 
                 scan_1.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -717,7 +535,7 @@ public class Prep_Materiel extends JPanel {
                 grid_mat.fill = GridBagConstraints.HORIZONTAL;
 
                 scan_2.setOpaque(true);
-                scan_2.setText("SCAN");
+           
                 scan_2.setHorizontalAlignment(SwingConstants.CENTER); 
                 scan_2.setFont(new Font("Arial", Font.PLAIN, 17));
                 scan_2.setBackground(Color.WHITE);
@@ -727,6 +545,21 @@ public class Prep_Materiel extends JPanel {
                 grid_mat.gridx = 3;
                 grid_mat.gridy = i;
                 mat.add(scan_2, grid_mat);
+                
+                if (test3 != max & i > protocole.getNbMateriel()){
+                        for (int j = protocole.getNbMateriel(); j*40+40 < max; j++){
+                            quant = new JLabel();
+                            quant.setPreferredSize(new Dimension(40, 30));
+                            grid_mat.gridx = 0;
+                            grid_mat.gridy = j;
+                            mat.add(quant, grid_mat);
+                        }
+                }
+                
+                if (protocole.getNbMateriel() < 10){
+                    scrollPane4.setVerticalScrollBarPolicy(
+                        JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+                }
             }
  
         }
