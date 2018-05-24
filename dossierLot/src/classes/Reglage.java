@@ -12,9 +12,13 @@ package classes;
 class Reglage {
     private String parametre;
     private String valeur;
-
+    
+    //--------------- --------------- --------------- CONSTRUCTEURS --------------- --------------- ---------------
+    
     public Reglage() {
     }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
 
     public Reglage(String parametre, String valeur) {
         this.parametre = parametre;

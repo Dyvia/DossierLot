@@ -11,14 +11,18 @@ import java.util.ArrayList;
  * @author dyvia
  */
 public class Protocole {
+    
     private int type;
     private String intitule;
     private String resultat;
     private int etat;
     private ArrayList<Etape> etapes;
     private ArrayList<Necessaire> necessaire;
+    private Necessaire conditionnement;
     private String salle;
     private ArrayList<String> intervenants;
+    
+//--------------- --------------- --------------- CONSTRUCTEURS --------------- --------------- ---------------
 
     public Protocole(int type, String intitule) {
         this.type = type;
@@ -27,57 +31,43 @@ public class Protocole {
         necessaire=new ArrayList<Necessaire>();
     }
     
-    public void ajoutEtape(Etape etape){
-        etapes.add(etape);
-    }
-
+//--------------- --------------- --------------- GETTERS --------------- --------------- ---------------
+    
     public int getType() {
         return type;
     }
 
-    public void setType(int type) {
-        this.type = type;
-    }
+    //---------- ---------- ---------- ---------- ---------- ----------
 
     public String getIntitule() {
         return intitule;
     }
-
-    public void setIntitule(String intitule) {
-        this.intitule = intitule;
-    }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
 
     public String getResultat() {
         return resultat;
     }
 
-    public void setResultat(String resultat) {
-        this.resultat = resultat;
-    }
+    //---------- ---------- ---------- ---------- ---------- ----------
 
     public int getEtat() {
         return etat;
     }
 
-    public void setEtat(int etat) {
-        this.etat = etat;
-    }
+    //---------- ---------- ---------- ---------- ---------- ----------
 
     public String getSalle() {
         return salle;
     }
 
-    public void setSalle(String salle) {
-        this.salle = salle;
-    }
-
-    void ajoutItem(Necessaire itemToAdd) {
-        necessaire.add(itemToAdd);
-    }
-
+    //---------- ---------- ---------- ---------- ---------- ----------
+    
     public ArrayList<Necessaire> getNecessaire() {
         return necessaire;
     }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
     
     public int getNbChimique(){
         int cpt=0;
@@ -90,6 +80,8 @@ public class Protocole {
         return cpt;
     }
     
+    //---------- ---------- ---------- ---------- ---------- ----------
+    
     public int getNbExcipient(){
          int cpt=0;
         for(int i=0;i<necessaire.size();i++){
@@ -101,6 +93,8 @@ public class Protocole {
         return cpt;
     
     }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
 
     public int getNbMateriel(){
          int cpt=0;
@@ -113,8 +107,47 @@ public class Protocole {
         return cpt;
     }
     
+    //--------------- --------------- --------------- SETTERS --------------- --------------- ---------------
     
+    public void setSalle(String salle) {
+        this.salle = salle;
+    }
+     
+    //---------- ---------- ---------- ---------- ---------- ----------
+
+    void ajoutItem(Necessaire itemToAdd) {
+        necessaire.add(itemToAdd);
+    }
     
+    //---------- ---------- ---------- ---------- ---------- ----------
+    
+    public void setEtat(int etat) {
+        this.etat = etat;
+    }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
+    
+    public void setType(int type) {
+        this.type = type;
+    }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
+
+    public void setIntitule(String intitule) {
+        this.intitule = intitule;
+    }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
+    
+    public void setResultat(String resultat) {
+        this.resultat = resultat;
+    } 
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
+    
+    public void ajoutEtape(Etape etape){
+        etapes.add(etape);
+    }
 }
 
 

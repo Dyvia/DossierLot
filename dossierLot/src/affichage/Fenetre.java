@@ -68,7 +68,7 @@ public class Fenetre extends JFrame implements ActionListener,KeyListener, Compo
     
     void initialisation(int w, int h){
         
-        System.out.println(this.getPreferredSize().width + " et " + this.getPreferredSize().height);
+        //System.out.println(this.getPreferredSize().width + " et " + this.getPreferredSize().height);
         
          //Acceuil 
         acceuil = new Acceuil(w, h);
@@ -227,7 +227,7 @@ public class Fenetre extends JFrame implements ActionListener,KeyListener, Compo
             Fenetre.this.backAcceuil();
         }
         if (clic.getSource() == access.b_acc_lot){
-            donnees.prepEnCours(access.getNumLot(),access.getNomMed(),access.getQteMed());
+            donnees.setPrepEnCours(access.getNumLot(),access.getNomMed(),access.getQteMed());
             Fenetre.this.AccessToEtapes();
         }  
         

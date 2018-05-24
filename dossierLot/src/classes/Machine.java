@@ -13,16 +13,24 @@ import java.util.ArrayList;
  */
 
 class Machine {
+    
     private String nom;
     private ArrayList<Reglage> reglages;
+    
+//--------------- --------------- --------------- CONSTRUCTEURS --------------- --------------- ---------------
     
     public Machine(String nom) {
         this.nom = nom;
         reglages=new ArrayList<Reglage>();
     }
     
-    public void ajoutReglage(String param, String valeur){
+//--------------- --------------- --------------- GETTERS --------------- --------------- ---------------
+    
+    
+    
+//--------------- --------------- --------------- SETTERS --------------- --------------- ---------------
+    
+     public void ajoutReglage(String param, String valeur){
         reglages.add(new Reglage(param,valeur));
     }
-    
 }

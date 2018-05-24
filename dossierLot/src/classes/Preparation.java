@@ -14,6 +14,7 @@ import java.util.Date;
  * @author dyvia
  */
 public class Preparation {
+    
     private String numLot;
     private String numOrd;
     private int qte;
@@ -22,19 +23,26 @@ public class Preparation {
     private String photo;
     private String etiquette;
     private Medicament medicament;
-
+    
+//--------------- --------------- --------------- CONSTRUCTEURS --------------- --------------- ---------------
+    
     Preparation(String numLot,Medicament medicament,String qteMed) {
         this.numLot=numLot;
         this.medicament=medicament;
         this.qte=Integer.parseInt(qteMed);
     }
-
+    
+//--------------- --------------- --------------- GETTERS --------------- --------------- ---------------
+    
     public Medicament getMedicament() {
         return medicament;
     }
+    
+//--------------- --------------- --------------- SETTERS --------------- --------------- ---------------
 
-    
-    
+
+//--------------- --------------- --------------- AFFICHAGE --------------- --------------- ---------------
+
     @Override
     public String toString() {
         return "Preparation{" + "numLot=" + numLot + ", numOrd=" + numOrd + ", qte=" + qte + ", datePrep=" + datePrep + ", dateLim=" + dateLim + ", photo=" + photo + ", etiquette=" + etiquette + ", medicament=" + medicament + '}';

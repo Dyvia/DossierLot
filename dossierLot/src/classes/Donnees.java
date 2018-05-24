@@ -26,20 +26,22 @@ import java.util.Iterator;
  * @author dyvia
  */
 public class Donnees {
+    
     private ArrayList<Medicament> medicaments;
     private int nbMedicaments=0;
     private String cheminJSON;
     private String cheminLots;
     private String cheminPDF;
     private Preparation prepEnCours;
-   
+    
+//--------------- --------------- --------------- PARSAGE JSON --------------- --------------- --------------- 
     
     public boolean parseJSONMedicaments() throws ParseException{
         medicaments=new  ArrayList<Medicament>();
         JSONParser parser = new JSONParser();
 
         try {
-
+            
             Object obj = parser.parse(new FileReader(cheminJSON+"medicaments.json"));
 
             JSONObject jsonObject = (JSONObject) obj;
@@ -48,6 +50,7 @@ public class Donnees {
             for(int i=0;i<medicaments.size();i++){
                 JSONObject medicament = (JSONObject) medicaments.get(i);
                 
+                //---------- ---------- INFOS MEDICAMENT ---------- ----------
                 int id=Integer.parseInt((String)medicament.get("id"));
                 int type=Integer.parseInt((String)medicament.get("type"));
                 String nom =(String)medicament.get("nom");
@@ -57,6 +60,8 @@ public class Donnees {
                 int joursUtilisation=Integer.parseInt((String)medicament.get("nbJours"));
                 int conditionnement=Integer.parseInt((String)medicament.get("conditionnement"));
                 
+                
+                //---------- ---------- PROTOCOLES MEDICAMENT ---------- ----------
                 JSONArray protocolesArr=(JSONArray)medicament.get("protocoles");
                 int[] protocolesTab=new int[protocolesArr.size()];
                 int curseur=0;
@@ -66,20 +71,16 @@ public class Donnees {
                     curseur++;
                 }
                 Medicament toAdd=new Medicament(id,type,nom,indication,precautions,stockage,joursUtilisation);
+                //----- ----- AJOUT MEDICAMENT ----- -----
                 this.medicaments.add(toAdd);
                 for(int f=0;f<protocolesArr.size();f++){
-                    parseJSONProtocole(this.medicaments.indexOf(toAdd),protocolesTab[f]); 
+                    parseJSONProtocole(this.medicaments.indexOf(toAdd),protocolesTab[f]);
+                    //----- ----- AJOUT CONDITIONNEMENT ----- -----
+                    if(this.medicaments.get(this.medicaments.indexOf(toAdd)).getProtocoles().get(this.medicaments.get(this.medicaments.indexOf(toAdd)).getProtocoles().size() - 1).getType()==1){
+                        this.medicaments.get(this.medicaments.indexOf(toAdd)).getProtocoles().get(this.medicaments.get(this.medicaments.indexOf(toAdd)).getProtocoles().size() - 1).ajoutItem(parseJSONNecessaire(conditionnement,1));
+                    }
                 }
-                
-                System.out.println(this.medicaments.get(this.medicaments.indexOf(toAdd)).toString());
-                
             }
-            
-            
-            
-            
-         
-
         } catch (FileNotFoundException e) {
             return false;
         } catch (IOException e) {
@@ -87,6 +88,8 @@ public class Donnees {
         }
         return true;
     }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
     
     public boolean parseJSONProtocole(int idMed,int idProt) throws ParseException{
         JSONParser parser = new JSONParser();
@@ -99,10 +102,10 @@ public class Donnees {
             JSONArray protocoles = (JSONArray)jsonObject.get("protocoles");
             for(int i=0;i<protocoles.size();i++){
                 JSONObject protocole = (JSONObject) protocoles.get(i);
-    
                 int id=Integer.parseInt((String)protocole.get("id"));
-                
                 if(id==idProt){
+                    
+                    //---------- ---------- INFOS PROTOCOLE ---------- ----------
                     int type=Integer.parseInt((String)protocole.get("type"));
                     String intitule =(String)protocole.get("intitule");
                     String resultat;
@@ -114,8 +117,8 @@ public class Donnees {
                         resultat=(String)protocole.get("resultat");
                         toAdd.setResultat(resultat);
                     }
-                   
                     
+                    //----- ----- MACHINE ----- -----
                     if(protocole.containsKey("machine")){
                         JSONObject machine=(JSONObject)protocole.get("machine");
                         String nomMachine=(String)machine.get("nom");
@@ -129,7 +132,7 @@ public class Donnees {
                         }
                     }
 
-                    
+                    //----- ----- NECESSAIRE ----- -----
                     JSONArray necessaire=(JSONArray) protocole.get("necessaire");
                     for(int f=0;f<necessaire.size();f++){
                         JSONObject item= (JSONObject) necessaire.get(f);
@@ -140,6 +143,7 @@ public class Donnees {
                         toAdd.ajoutItem(itemToAdd);
                     }
                     
+                    //----- ----- ETAPES ----- -----
                     JSONArray etapes=(JSONArray) protocole.get("etapes");
                     for(int f=0;f<etapes.size();f++){
                         JSONObject etape= (JSONObject) etapes.get(f);
@@ -153,7 +157,7 @@ public class Donnees {
                         } 
                         toAdd.ajoutEtape(etapeToAdd);
                     }
-                    
+                    //----- -----AJOUT PROTOCOLE ----- -----
                     medicaments.get(idMed).ajoutProtocole(toAdd);
                 }
             }
@@ -164,7 +168,9 @@ public class Donnees {
         }
         return true;
     }
-
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
+    
     private Necessaire parseJSONNecessaire(int idItem,float qte) throws ParseException {
         JSONParser parser = new JSONParser();
 
@@ -180,11 +186,13 @@ public class Donnees {
                 int id=Integer.parseInt((String)item.get("id"));  
                 
                 if(id==idItem){
+                    //---------- ---------- INFOS ITEM ---------- ----------
                     String nom=(String)item.get("nom");
                     int type=Integer.parseInt((String)item.get("type"));
                     Necessaire itemToAdd=new Necessaire(id,nom,qte,type);
                     
                     if(type==1){
+                            //----- ----- CONDITIONNEMENT PRODUIT CHIMIQUE ----- -----
                             JSONArray conditionnement=(JSONArray)item.get("conditionnement");
                             int curseur=0;
                             Iterator<String> iterator = conditionnement.iterator();
@@ -205,21 +213,31 @@ public class Donnees {
         return null;
     }
     
+//--------------- --------------- --------------- GETTERS --------------- --------------- ---------------
+    
     public Medicament getMedicament(int id){
         return medicaments.get(id);
     }
     
+    //---------- ---------- ---------- ---------- ---------- ----------
+    
     public String getCheminJSON() {
         return cheminJSON;
     }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
 
     public String getCheminLots() {
         return cheminLots;
     }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
 
     public String getCheminPDF() {
         return cheminPDF;
     }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
     
     public Medicament getItemNomme(String nom){
         for(int i=0;i<medicaments.size();i++){
@@ -229,19 +247,9 @@ public class Donnees {
         }
         return null;
     }
-
-    public void setCheminJSON(String cheminJSON) {
-        this.cheminJSON = cheminJSON;
-    }
-
-    public void setCheminLots(String cheminLots) {
-        this.cheminLots = cheminLots;
-    }
-
-    public void setCheminPDF(String cheminPDF) {
-        this.cheminPDF = cheminPDF;
-    }
-
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
+    
     public ArrayList<String> getNomMedicaments(){
         ArrayList<String> listeNoms=new ArrayList<String>();
         for(int i=0;i<medicaments.size();i++){
@@ -254,12 +262,37 @@ public class Donnees {
         return listeNoms;
     }
     
-    public void prepEnCours(String numLot,String nomMed,String qteMed){
-        this.prepEnCours=new Preparation(numLot,getItemNomme(nomMed),qteMed);
-        System.out.println(this.prepEnCours);
-    }
-
+    //---------- ---------- ---------- ---------- ---------- ----------
+    
     public Preparation getPrepEnCours() {
         return prepEnCours;
     }
+    
+    
+//--------------- --------------- --------------- SETTERS --------------- --------------- ---------------
+
+    public void setCheminJSON(String cheminJSON) {
+        this.cheminJSON = cheminJSON;
+    }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
+    
+    public void setCheminLots(String cheminLots) {
+        this.cheminLots = cheminLots;
+    }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
+
+    public void setCheminPDF(String cheminPDF) {
+        this.cheminPDF = cheminPDF;
+    }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
+    
+    public void setPrepEnCours(String numLot,String nomMed,String qteMed){
+        this.prepEnCours=new Preparation(numLot,getItemNomme(nomMed),qteMed);
+        //System.out.println(this.prepEnCours);
+    }
+    
+    
 }
