@@ -33,7 +33,9 @@ public class Prep_Materiel extends JPanel {
     JScrollBar scroll;
     JPanel princ_act, exci, condi, mat, formule;
     int wid, hei;
-    Protocole protocole=null;
+    Protocole protocole= null;
+    boolean bool = true;
+    int i, k;
 
     public Prep_Materiel(int wi, int he) {
         
@@ -157,7 +159,7 @@ public class Prep_Materiel extends JPanel {
 
         mat.setBackground(Color.WHITE);
         mat.setLayout(new BoxLayout(mat, BoxLayout.PAGE_AXIS));
-        mat.setPreferredSize(new Dimension(wid/2 - wid*5/100, 5000));
+        mat.setPreferredSize(new Dimension(wid/2 - wid*5/100, hei*60/100+40));
         mat.setAutoscrolls(true);
 
         
@@ -206,10 +208,6 @@ public class Prep_Materiel extends JPanel {
         GridBagConstraints grid_condi = new GridBagConstraints();
         GridBagConstraints grid_mat = new GridBagConstraints();
         
-        
-
-        int i =0;
-        
         grid_princ_act.weighty = 1;
         
         quant = new JLabel();
@@ -223,18 +221,19 @@ public class Prep_Materiel extends JPanel {
         grid_princ_act.gridx = 0;
         grid_princ_act.gridy = 0;
         princ_act.add(quant, grid_princ_act);
-               
-        for (i = 1; i < protocole.getNecessaire().size(); i++) {
-  
-            if(protocole.getNecessaire().get(i-1).getType()== 1){
-                quant = new JLabel (Float.toString(protocole.getNecessaire().get(i-1).getQte()));
-                name = new JLabel (protocole.getNecessaire().get(i-1).getNom());
+        
+        k = 1;   
+        for (i = 1; i <= protocole.getNbChimique(); i++) {
+            
+            while(bool){
+            if(protocole.getNecessaire().get(k-1).getType()== 1){
+                quant = new JLabel (Float.toString(protocole.getNecessaire().get(k-1).getQte()));
+                name = new JLabel (protocole.getNecessaire().get(k-1).getNom());
                 scan_1 = new JLabel ("SCAN");
                 scan_2 = new JLabel ("SCAN");
 
                 grid_princ_act.weightx = 0;
-    
-       
+         
                 quant.setOpaque(true);
                 quant.setHorizontalAlignment(SwingConstants.CENTER); 
                 quant.setFont(new Font("Arial", Font.BOLD, 17));
@@ -245,7 +244,6 @@ public class Prep_Materiel extends JPanel {
                 grid_princ_act.gridx = 1;
                 grid_princ_act.gridy = i;
                 princ_act.add(quant, grid_princ_act);
-
 
                 name.setOpaque(true);
                 name.setHorizontalAlignment(SwingConstants.CENTER); 
@@ -258,7 +256,6 @@ public class Prep_Materiel extends JPanel {
                 grid_princ_act.gridy = i;
                 princ_act.add(name, grid_princ_act);
 
-
                 scan_1.setOpaque(true);
                 scan_1.setHorizontalAlignment(SwingConstants.CENTER); 
                 scan_1.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -269,7 +266,6 @@ public class Prep_Materiel extends JPanel {
                 grid_princ_act.gridx = 3;
                 grid_princ_act.gridy = i;
                 princ_act.add(scan_1, grid_princ_act);
-
 
                 scan_2.setOpaque(true);
                 scan_2.setHorizontalAlignment(SwingConstants.CENTER); 
@@ -282,10 +278,9 @@ public class Prep_Materiel extends JPanel {
                 grid_princ_act.gridy = i;
                 princ_act.add(scan_2, grid_princ_act);
             
-                System.out.println("test1 : " + test1 + "max : " + max + "i : " + i);
                 if (test1 != max & i == protocole.getNbChimique()){
                     System.out.println("aaa");
-                   for (int j = protocole.getNbChimique(); j*40+40 < max; j++){
+                   for (int j = i+1; j*40+40 < max; j++){
                        quant = new JLabel();
                        quant.setPreferredSize(new Dimension(40, 30));
                        grid_princ_act.gridx = 0;
@@ -293,11 +288,16 @@ public class Prep_Materiel extends JPanel {
                        princ_act.add(quant, grid_princ_act);
                    }
                 }
-                 
-                if (protocole.getNbChimique() < 4){
+                bool = false;
+            }
+            
+            else{ k++; }
+            
+            }
+            
+            if (protocole.getNbChimique() < 4){
                     scrollPane.setVerticalScrollBarPolicy(
                         JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-                }
             }
         }
             
@@ -315,86 +315,93 @@ public class Prep_Materiel extends JPanel {
         grid_exci.gridx = 0;
         grid_exci.gridy = 0;
         exci.add(quant, grid_exci);
-
-        for (i = 1; i < protocole.getNecessaire().size(); i++) {
-System.out.println("noooooooooooo");
-            if(protocole.getNecessaire().get(i-1).getType()==2){
-                quant = new JLabel (Float.toString(protocole.getNecessaire().get(i-1).getQte()));
-                name = new JLabel (protocole.getNecessaire().get(i-1).getNom());
-                scan_1 = new JLabel ("SCAN");
-                scan_2 = new JLabel ("SCAN");
-
-                grid_exci.weightx = 0;
-
-                quant.setOpaque(true);
-                quant.setHorizontalAlignment(SwingConstants.CENTER); 
-                quant.setFont(new Font("Arial", Font.BOLD, 17));
-                quant.setBackground(new java.awt.Color(0,156,218));
-                quant.setForeground(Color.WHITE);
-                quant.setPreferredSize(new Dimension(40, 30));
-                quant.setBorder(new LineBorder(Color.BLUE));
-                grid_exci.gridx = 1;
-                System.out.println("i : " + i);
-                grid_exci.gridy = i;
-                exci.add(quant, grid_exci);
-
- 
-                name.setOpaque(true);
-                name.setHorizontalAlignment(SwingConstants.CENTER); 
-                name.setFont(new Font("Arial", Font.PLAIN, 17));
-                name.setBackground(new java.awt.Color(0,156,218));
-                name.setForeground(Color.WHITE);
-                name.setPreferredSize(new Dimension(300, 30));
-                name.setBorder(new LineBorder(Color.BLUE));
-                grid_exci.gridx = 2;
-                grid_exci.gridy = i;
-                exci.add(name, grid_exci);
-
-     
-                scan_1.setOpaque(true);
-                scan_1.setHorizontalAlignment(SwingConstants.CENTER); 
-                scan_1.setFont(new Font("Arial", Font.PLAIN, 17));
-                scan_1.setBackground(Color.WHITE);
-                scan_1.setForeground(new java.awt.Color(0,156,218));
-                scan_1.setPreferredSize(new Dimension(200, 30));
-                scan_1.setBorder(new LineBorder(Color.BLUE));
-                grid_exci.gridx = 3;
-                grid_exci.gridy = i;
-                exci.add(scan_1, grid_exci);
-
-                grid_exci.fill = GridBagConstraints.HORIZONTAL;
-
-                scan_2.setOpaque(true);
-                scan_2.setHorizontalAlignment(SwingConstants.CENTER); 
-                scan_2.setFont(new Font("Arial", Font.PLAIN, 17));
-                scan_2.setBackground(Color.WHITE);
-                scan_2.setForeground(new java.awt.Color(0,156,218));
-                scan_2.setPreferredSize(new Dimension(150, 30));
-                scan_2.setBorder(new LineBorder(Color.BLUE));
-                grid_exci.gridx = 4;
-                grid_exci.gridy = i;
-                exci.add(scan_2, grid_exci);
+        
+        bool = true;
+        k = 1;
+        for (i = 1; i <= protocole.getNbExcipient(); i++) {
+            System.out.println(" exci - i : " + i);
             
-                System.out.println("test2 : " + test2 + "max : " + max + "i : " + i);
-                if (test2 != max & i-1 == protocole.getNbExcipient()){ 
-                   System.out.println("YES");
-                   for (int j = protocole.getNbExcipient(); j*40+40 < max; j++){
-                       quant = new JLabel();
-                       quant.setPreferredSize(new Dimension(40, 30));
-                       grid_exci.gridx = 0;
-                       grid_exci.gridy = j;
-                       exci.add(quant, grid_exci);
-                   }
+            while (bool){
+                
+                if(protocole.getNecessaire().get(k-1).getType()==2){
+                    quant = new JLabel (Float.toString(protocole.getNecessaire().get(k-1).getQte()));
+                    name = new JLabel (protocole.getNecessaire().get(k-1).getNom());
+                    scan_1 = new JLabel ("SCAN");
+                    scan_2 = new JLabel ("SCAN");
+
+                    grid_exci.weightx = 0;
+
+                    quant.setOpaque(true);
+                    quant.setHorizontalAlignment(SwingConstants.CENTER); 
+                    quant.setFont(new Font("Arial", Font.BOLD, 17));
+                    quant.setBackground(new java.awt.Color(0,156,218));
+                    quant.setForeground(Color.WHITE);
+                    quant.setPreferredSize(new Dimension(40, 30));
+                    quant.setBorder(new LineBorder(Color.BLUE));
+                    grid_exci.gridx = 1;
+                    System.out.println("i : " + i);
+                    grid_exci.gridy = i;
+                    exci.add(quant, grid_exci);
+
+                    name.setOpaque(true);
+                    name.setHorizontalAlignment(SwingConstants.CENTER); 
+                    name.setFont(new Font("Arial", Font.PLAIN, 17));
+                    name.setBackground(new java.awt.Color(0,156,218));
+                    name.setForeground(Color.WHITE);
+                    name.setPreferredSize(new Dimension(300, 30));
+                    name.setBorder(new LineBorder(Color.BLUE));
+                    grid_exci.gridx = 2;
+                    grid_exci.gridy = i;
+                    exci.add(name, grid_exci);
+
+                    scan_1.setOpaque(true);
+                    scan_1.setHorizontalAlignment(SwingConstants.CENTER); 
+                    scan_1.setFont(new Font("Arial", Font.PLAIN, 17));
+                    scan_1.setBackground(Color.WHITE);
+                    scan_1.setForeground(new java.awt.Color(0,156,218));
+                    scan_1.setPreferredSize(new Dimension(200, 30));
+                    scan_1.setBorder(new LineBorder(Color.BLUE));
+                    grid_exci.gridx = 3;
+                    grid_exci.gridy = i;
+                    exci.add(scan_1, grid_exci);
+
+                    grid_exci.fill = GridBagConstraints.HORIZONTAL;
+
+                    scan_2.setOpaque(true);
+                    scan_2.setHorizontalAlignment(SwingConstants.CENTER); 
+                    scan_2.setFont(new Font("Arial", Font.PLAIN, 17));
+                    scan_2.setBackground(Color.WHITE);
+                    scan_2.setForeground(new java.awt.Color(0,156,218));
+                    scan_2.setPreferredSize(new Dimension(150, 30));
+                    scan_2.setBorder(new LineBorder(Color.BLUE));
+                    grid_exci.gridx = 4;
+                    grid_exci.gridy = i;
+                    exci.add(scan_2, grid_exci);
+
+                    if (test2 != max & i == protocole.getNbExcipient()){ 
+                       System.out.println("YES");
+                       for (int j = i+1; j*40+40 < max; j++){
+                           quant = new JLabel();
+                           quant.setPreferredSize(new Dimension(40, 30));
+                           grid_exci.gridx = 0;
+                           grid_exci.gridy = j;
+                           exci.add(quant, grid_exci);
+                       }
+                    }
+                    bool = false;
+                    k++;
                 }
-                 
-                if (protocole.getNbExcipient()< 4){
-                   scrollPane2.setVerticalScrollBarPolicy(
-                       JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-                }
+                else { k++; }
             }
+            
+            if (protocole.getNbExcipient()< 4){
+               scrollPane2.setVerticalScrollBarPolicy(
+                   JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+            }
+            
         }
         
-        grid_condi.weighty = 1;
+        /*grid_condi.weighty = 1;
        
         quant = new JLabel();
         quant.setText("Conditionnement");
@@ -408,160 +415,176 @@ System.out.println("noooooooooooo");
         grid_condi.gridy = 0;
         condi.add(quant, grid_condi);
         
-
-        for (i = 1; i < protocole.getNecessaire().size(); i++) {
- 
-            if(protocole.getNecessaire().get(i-1).getType()==4){
+        bool = true;
+        k = 1;
+        for (i = 1; i <= var3; i++) {
+            System.out.println(" condi - i : " + i);
+            
+            
+            while (bool){
                 
-                quant = new JLabel (Float.toString(protocole.getNecessaire().get(i-1).getQte()));
-                name = new JLabel (protocole.getNecessaire().get(i-1).getNom());
-                scan_1 = new JLabel ("SCAN");
-                scan_2 = new JLabel ("SCAN");
+                if(protocole.getNecessaire().get(k-1).getType()==4){
+                    quant = new JLabel (Float.toString(protocole.getNecessaire().get(k-1).getQte()));
+                    name = new JLabel (protocole.getNecessaire().get(k-1).getNom());
+                    scan_1 = new JLabel ("SCAN");
+                    scan_2 = new JLabel ("SCAN");
 
-                grid_condi.weightx = 0;
+                    grid_condi.weightx = 0;
 
-                quant.setOpaque(true);
-                quant.setHorizontalAlignment(SwingConstants.CENTER); 
-                quant.setFont(new Font("Arial", Font.BOLD, 17));
-                quant.setBackground(new java.awt.Color(0,156,218));
-                quant.setForeground(Color.WHITE);
-                quant.setPreferredSize(new Dimension(40, 30));
-                quant.setBorder(new LineBorder(Color.BLUE));
-                grid_condi.gridx = 1;
-                grid_condi.gridy = i;
-                condi.add(quant, grid_condi);
+                    quant.setOpaque(true);
+                    quant.setHorizontalAlignment(SwingConstants.CENTER); 
+                    quant.setFont(new Font("Arial", Font.BOLD, 17));
+                    quant.setBackground(new java.awt.Color(0,156,218));
+                    quant.setForeground(Color.WHITE);
+                    quant.setPreferredSize(new Dimension(40, 30));
+                    quant.setBorder(new LineBorder(Color.BLUE));
+                    grid_condi.gridx = 1;
+                    grid_condi.gridy = i;
+                    condi.add(quant, grid_condi);
 
-             
-                name.setOpaque(true);
-                name.setHorizontalAlignment(SwingConstants.CENTER); 
-                name.setFont(new Font("Arial", Font.PLAIN, 17));
-                name.setBackground(new java.awt.Color(0,156,218));
-                name.setForeground(Color.WHITE);
-                name.setPreferredSize(new Dimension(300, 30));
-                name.setBorder(new LineBorder(Color.BLUE));
-                grid_condi.gridx = 2;
-                grid_condi.gridy = i;
-                condi.add(name, grid_condi);
+                    name.setOpaque(true);
+                    name.setHorizontalAlignment(SwingConstants.CENTER); 
+                    name.setFont(new Font("Arial", Font.PLAIN, 17));
+                    name.setBackground(new java.awt.Color(0,156,218));
+                    name.setForeground(Color.WHITE);
+                    name.setPreferredSize(new Dimension(300, 30));
+                    name.setBorder(new LineBorder(Color.BLUE));
+                    grid_condi.gridx = 2;
+                    grid_condi.gridy = i;
+                    condi.add(name, grid_condi);
 
-           
-                scan_1.setOpaque(true);
-                scan_1.setHorizontalAlignment(SwingConstants.CENTER); 
-                scan_1.setFont(new Font("Arial", Font.PLAIN, 17));
-                scan_1.setBackground(Color.WHITE);
-                scan_1.setForeground(new java.awt.Color(0,156,218));
-                scan_1.setPreferredSize(new Dimension(200, 30));
-                scan_1.setBorder(new LineBorder(Color.BLUE));
-                grid_condi.gridx = 3;
-                grid_condi.gridy = i;
-                condi.add(scan_1, grid_condi);
+                    scan_1.setOpaque(true);
+                    scan_1.setHorizontalAlignment(SwingConstants.CENTER); 
+                    scan_1.setFont(new Font("Arial", Font.PLAIN, 17));
+                    scan_1.setBackground(Color.WHITE);
+                    scan_1.setForeground(new java.awt.Color(0,156,218));
+                    scan_1.setPreferredSize(new Dimension(200, 30));
+                    scan_1.setBorder(new LineBorder(Color.BLUE));
+                    grid_condi.gridx = 3;
+                    grid_condi.gridy = i;
+                    condi.add(scan_1, grid_condi);
 
-                
-                scan_2.setOpaque(true);
-                scan_2.setHorizontalAlignment(SwingConstants.CENTER); 
-                scan_2.setFont(new Font("Arial", Font.PLAIN, 17));
-                scan_2.setBackground(Color.WHITE);
-                scan_2.setForeground(new java.awt.Color(0,156,218));
-                scan_2.setPreferredSize(new Dimension(150, 30));
-                scan_2.setBorder(new LineBorder(Color.BLUE));
-                grid_condi.gridx = 4;
-                grid_condi.gridy = i;
-                condi.add(scan_2, grid_condi);
+                    scan_2.setOpaque(true);
+                    scan_2.setHorizontalAlignment(SwingConstants.CENTER); 
+                    scan_2.setFont(new Font("Arial", Font.PLAIN, 17));
+                    scan_2.setBackground(Color.WHITE);
+                    scan_2.setForeground(new java.awt.Color(0,156,218));
+                    scan_2.setPreferredSize(new Dimension(150, 30));
+                    scan_2.setBorder(new LineBorder(Color.BLUE));
+                    grid_condi.gridx = 4;
+                    grid_condi.gridy = i;
+                    condi.add(scan_2, grid_condi);
 
-
-                if (test3 != max & i > var3){
-                   for (int j = var3; j*40+40 < max; j++){
-                       quant = new JLabel();
-                       quant.setPreferredSize(new Dimension(40, 30));
-                       grid_condi.gridx = 0;
-                       grid_condi.gridy = j;
-                       condi.add(quant, grid_condi);
-                   }
+                    if (test3 != max & i == var3){
+                       for (int j = i+1; j*40+40 < max; j++){
+                           quant = new JLabel();
+                           quant.setPreferredSize(new Dimension(40, 30));
+                           grid_condi.gridx = 0;
+                           grid_condi.gridy = j;
+                           condi.add(quant, grid_condi);
+                       }
+                    }
+                    bool = false;
+                    k++;
                 }
-                
-                if (var3 < 4){
-                    scrollPane3.setVerticalScrollBarPolicy(
-                        JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-                }
+                else { k++; }
             }
-        }
+            
+            if (var3 < 4){
+                scrollPane3.setVerticalScrollBarPolicy(
+                    JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+            }
+        }*/
+        
 
         grid_mat.weighty = 1;
- 
+        
+        bool = true;
+        k = 0;
         for (i = 0; i <protocole.getNbMateriel(); i++) {
-            
-            if(protocole.getNecessaire().get(i).getType()==3){
-             
-                quant = new JLabel (Float.toString(protocole.getNecessaire().get(i).getQte()));
-                name = new JLabel (protocole.getNecessaire().get(i).getNom());
-                scan_1 = new JLabel ("SCAN");
-                scan_2 = new JLabel ("SCAN");
-
-                grid_mat.weightx = 0;
-                
-                quant.setOpaque(true);
-                quant.setHorizontalAlignment(SwingConstants.CENTER); 
-                quant.setFont(new Font("Arial", Font.BOLD, 17));
-                quant.setBackground(new java.awt.Color(0,156,218));
-                quant.setForeground(Color.WHITE);
-                quant.setPreferredSize(new Dimension(40, 30));
-                quant.setBorder(new LineBorder(Color.BLUE));
-                grid_mat.gridx = 0;
-                grid_mat.gridy = i;
-                mat.add(quant, grid_mat);
-
-                
-                name.setOpaque(true);
-                name.setHorizontalAlignment(SwingConstants.CENTER); 
-                name.setFont(new Font("Arial", Font.PLAIN, 17));
-                name.setBackground(new java.awt.Color(0,156,218));
-                name.setForeground(Color.WHITE);
-                name.setPreferredSize(new Dimension(300, 30));
-                name.setBorder(new LineBorder(Color.BLUE));
-                grid_mat.gridx = 1;
-                grid_mat.gridy = i;
-                mat.add(name, grid_mat);
-
-                scan_1.setOpaque(true);
-                scan_1.setHorizontalAlignment(SwingConstants.CENTER); 
-                scan_1.setFont(new Font("Arial", Font.PLAIN, 17));
-                scan_1.setBackground(Color.WHITE);
-                scan_1.setForeground(new java.awt.Color(0,156,218));
-                scan_1.setPreferredSize(new Dimension(200, 30));
-                scan_1.setBorder(new LineBorder(Color.BLUE));
-                grid_mat.gridx = 2;
-                grid_mat.gridy = i;
-                mat.add(scan_1, grid_mat);
-
-                grid_mat.fill = GridBagConstraints.HORIZONTAL;
-
-                scan_2.setOpaque(true);
-           
-                scan_2.setHorizontalAlignment(SwingConstants.CENTER); 
-                scan_2.setFont(new Font("Arial", Font.PLAIN, 17));
-                scan_2.setBackground(Color.WHITE);
-                scan_2.setForeground(new java.awt.Color(0,156,218));
-                scan_2.setPreferredSize(new Dimension(150, 30));
-                scan_2.setBorder(new LineBorder(Color.BLUE));
-                grid_mat.gridx = 3;
-                grid_mat.gridy = i;
-                mat.add(scan_2, grid_mat);
-                
-                if (test3 != max & i > protocole.getNbMateriel()){
-                        for (int j = protocole.getNbMateriel(); j*40+40 < max; j++){
-                            quant = new JLabel();
-                            quant.setPreferredSize(new Dimension(40, 30));
-                            grid_mat.gridx = 0;
-                            grid_mat.gridy = j;
-                            mat.add(quant, grid_mat);
-                        }
-                }
-                
-                if (protocole.getNbMateriel() < 10){
-                    scrollPane4.setVerticalScrollBarPolicy(
-                        JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-                }
+            System.out.println(" mat - i : " + i);
+            System.out.println(" mat - k : " + k);
+            if (i < protocole.getNbMateriel()){
+                bool = true;
             }
- 
+            
+            while (bool){
+            
+                if(protocole.getNecessaire().get(k).getType()==3){
+
+                    quant = new JLabel (Float.toString(protocole.getNecessaire().get(k).getQte()));
+                    name = new JLabel (protocole.getNecessaire().get(k).getNom());
+                    System.out.println(protocole.getNecessaire().get(k).getNom());
+                    scan_1 = new JLabel ("SCAN");
+                    scan_2 = new JLabel ("SCAN");
+
+                    grid_mat.weightx = 0;
+
+                    quant.setOpaque(true);
+                    quant.setHorizontalAlignment(SwingConstants.CENTER); 
+                    quant.setFont(new Font("Arial", Font.BOLD, 17));
+                    quant.setBackground(new java.awt.Color(0,156,218));
+                    quant.setForeground(Color.WHITE);
+                    quant.setPreferredSize(new Dimension(40, 30));
+                    quant.setBorder(new LineBorder(Color.BLUE));
+                    grid_mat.gridx = 0;
+                    grid_mat.gridy = i;
+                    mat.add(quant, grid_mat);
+
+                    name.setOpaque(true);
+                    name.setHorizontalAlignment(SwingConstants.CENTER); 
+                    name.setFont(new Font("Arial", Font.PLAIN, 17));
+                    name.setBackground(new java.awt.Color(0,156,218));
+                    name.setForeground(Color.WHITE);
+                    name.setPreferredSize(new Dimension(300, 30));
+                    name.setBorder(new LineBorder(Color.BLUE));
+                    grid_mat.gridx = 1;
+                    grid_mat.gridy = i;
+                    mat.add(name, grid_mat);
+
+                    scan_1.setOpaque(true);
+                    scan_1.setHorizontalAlignment(SwingConstants.CENTER); 
+                    scan_1.setFont(new Font("Arial", Font.PLAIN, 17));
+                    scan_1.setBackground(Color.WHITE);
+                    scan_1.setForeground(new java.awt.Color(0,156,218));
+                    scan_1.setPreferredSize(new Dimension(200, 30));
+                    scan_1.setBorder(new LineBorder(Color.BLUE));
+                    grid_mat.gridx = 2;
+                    grid_mat.gridy = i;
+                    mat.add(scan_1, grid_mat);
+
+                    grid_mat.fill = GridBagConstraints.HORIZONTAL;
+
+                    scan_2.setOpaque(true);
+                    scan_2.setHorizontalAlignment(SwingConstants.CENTER); 
+                    scan_2.setFont(new Font("Arial", Font.PLAIN, 17));
+                    scan_2.setBackground(Color.WHITE);
+                    scan_2.setForeground(new java.awt.Color(0,156,218));
+                    scan_2.setPreferredSize(new Dimension(150, 30));
+                    scan_2.setBorder(new LineBorder(Color.BLUE));
+                    grid_mat.gridx = 3;
+                    grid_mat.gridy = i;
+                    mat.add(scan_2, grid_mat);
+
+                    if (i == protocole.getNbMateriel()-1){
+                            for (int j = i; j*40+40 < hei*60/100+40; j++){
+                                quant = new JLabel();
+                                quant.setPreferredSize(new Dimension(40, 30));
+                                grid_mat.gridx = 0;
+                                grid_mat.gridy = j;
+                                mat.add(quant, grid_mat);
+                            }
+                    }
+                    bool = false;
+                    k++;
+                }
+                else { k++; }
+            }
+                
+            if (protocole.getNbMateriel() < 2){
+                scrollPane4.setVerticalScrollBarPolicy(
+                    JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+            }    
         }
         
         this.setLayout(null);
