@@ -12,7 +12,9 @@ import java.util.ArrayList;
  *
  * @author dyvia
  */
+
 public class Necessaire {
+    
     private int id;
     private String numLot;
     private String dateLim;
@@ -20,7 +22,10 @@ public class Necessaire {
     private float qte;
     private int type;
     private ArrayList<Integer> conditionnement;
-
+    
+    
+//--------------- --------------- --------------- CONSTRUCTEURS --------------- --------------- ---------------
+    
     public Necessaire(int id,String nom, float qte, int type) {
         this.id=id;
         this.nom = nom;
@@ -28,39 +33,53 @@ public class Necessaire {
         this.type = type;
         conditionnement=new ArrayList<Integer>();
     }
-
-    void ajoutConditionnement(int conditionnementToAdd) {
-       this.conditionnement.add(conditionnementToAdd);
-    }
-
+    
+//--------------- --------------- --------------- GETTERS --------------- --------------- ---------------
+    
     public int getId() {
         return id;
     }
-
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
+    
     public String getNumLot() {
         return numLot;
     }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
 
     public String getDateLim() {
         return dateLim;
     }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
 
     public String getNom() {
         return nom;
     }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
 
     public float getQte() {
         return qte;
     }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
 
     public int getType() {
         return type;
     }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
 
     public ArrayList<Integer> getConditionnement() {
         return conditionnement;
     }
     
     
-    
+//--------------- --------------- --------------- SETTERS --------------- --------------- ---------------
+
+    void ajoutConditionnement(int conditionnementToAdd) {
+       this.conditionnement.add(conditionnementToAdd);
+    }
 }

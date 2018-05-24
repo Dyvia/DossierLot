@@ -35,7 +35,7 @@ public class DossierLot {
         donnees.setCheminLots("C://Users//dyvia//OneDrive//Bureau//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//");
         donnees.setCheminPDF("C://Users//dyvia//OneDrive//Bureau//Stage//Projets//Gestion_de_lots_dématérialisée//netbeans//FILE TEST ZONE//");
         donnees.parseJSONMedicaments();
-        System.out.println(donnees.getNomMedicaments());
+        //System.out.println(donnees.getNomMedicaments());
         
          
         Fenetre f = new Fenetre(donnees);

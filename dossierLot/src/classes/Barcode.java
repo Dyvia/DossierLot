@@ -12,29 +12,43 @@ import java.util.Date;
  * @author dyvia
  */
 public class Barcode {
+    
     private String input;
     private String dateLim;
     private String numLot;
+    
+    
+//--------------- --------------- --------------- CONSTRUCTEUR --------------- --------------- ---------------
 
     public Barcode(String input) {
         this.input = input;
     }
 
-    public void setInput(String input) {
-        this.input = input;
-    }
+//--------------- --------------- --------------- GETTERS --------------- --------------- ---------------
     
     public String getInput() {
         return input;
     }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
 
     public String getDateLim() {
         return dateLim;
     }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
 
     public String getNumLot() {
         return numLot;
     }
+    
+//--------------- --------------- --------------- SETTERS --------------- --------------- ---------------
+    
+    public void setInput(String input) {
+        this.input = input;
+    }
+    
+//--------------- --------------- --------------- ANALYSE CODE BARRE --------------- --------------- ---------------
     
     public boolean analyse(){
         if(input.substring(0,3).equals("]C1")){
@@ -43,7 +57,12 @@ public class Barcode {
     
         return false;
     }
+    
+    //---------- ---------- ---------- ---------- ---------- ----------
+    
     public boolean GS1128(){
+        
+        //----- ----- TAILLE MAX CHAMPS ----- -----
         int decodage[]= new int[99];
         
         decodage[0]=18;
@@ -58,13 +77,11 @@ public class Barcode {
         System.out.println("GS1-128");
         int currentPos=3;
         int sizeVal=0;
-
+        //---------- ---------- DECODAGE CODE ---------- ----------
         while(currentPos<input.length()-1){
-
             if(input.charAt(currentPos)=='#'){
                 currentPos++;
             }
-
             int id=Integer.parseInt(input.substring(currentPos, currentPos+2));
             currentPos=currentPos+2;
             sizeVal=decodage[id];
@@ -77,6 +94,7 @@ public class Barcode {
                     sizeVal=i;
                 }
             }
+            //----- ----- RECUPERATION DONNEES ----- -----
             if(id==17){
                 dateLim=input.substring(currentPos,currentPos+sizeVal);
             }
