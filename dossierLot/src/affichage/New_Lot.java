@@ -48,8 +48,6 @@ public class New_Lot extends JPanel{
 
     public New_Lot(ArrayList<String> medicaments, int wi, int he) {
         
-       
-        
         b_new_lot = new JButton("<html><font size=10 style='Arial' color='white'>Nouveau lot</font></html>");
         b_retour = new JButton("<html><font size=15 style='Arial' color='white'>R</font></html>");
         qt = new JTextField("20");
